@@ -56,6 +56,7 @@ crime_data_raw[[crime_count_col]] <- as.numeric(crime_data_raw[[crime_count_col]
 # Rename the columns for easier access
 colnames(crime_data_raw) <- c("Index", "Crime_Type", "Year", "Region", "Total_Crimes")
 
+
 # Removing the original 'Index' column
 crime_data_clean <- crime_data_raw[, -1]
 
@@ -73,3 +74,14 @@ print(head(crime_data_clean))
 
 cat("\nAnd here is the structure of the data, showing 'Total_Crimes' is now numeric:\n")
 str(crime_data_clean)
+
+
+
+
+dat <- read.csv("unemployment_data_clean.csv",        
+                stringsAsFactors = FALSE)
+
+
+dat_t <- as.data.frame(t(dat))
+
+head(dat_t)
