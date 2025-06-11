@@ -26,3 +26,50 @@ head(DS2)
 
 # Saving as a new CSV file
 write.csv(DS2, "unemployment_data_clean.csv", row.names = FALSE)
+
+
+
+
+
+
+# We use read.csv because the separator is a comma.
+# Learned that stringsAsFactors = FALSE would be helpful
+crime_data_raw <- read.csv(
+  "Crime-and-Unemployment-Group-Project-FR-GIT/data/crime_data",
+  header = TRUE,
+  stringsAsFactors = FALSE
+)
+
+
+# The last column contains the crime counts with dots as thousands separators.
+# Getting the name of that column.
+crime_count_col <- names(crime_data_raw)[ncol(crime_data_raw)]
+
+# Removing the dots from the crime count column using gsub()
+# The \\. is used to specify a literal dot.
+crime_data_raw[[crime_count_col]] <- gsub("\\.", "", crime_data_raw[[crime_count_col]])
+
+# Converting the cleaned column to a numeric type
+crime_data_raw[[crime_count_col]] <- as.numeric(crime_data_raw[[crime_count_col]])
+
+
+# Rename the columns for easier access
+colnames(crime_data_raw) <- c("Index", "Crime_Type", "Year", "Region", "Total_Crimes")
+
+# Removing the original 'Index' column
+crime_data_clean <- crime_data_raw[, -1]
+
+
+# Saved the cleaned data frame to a new CSV file
+write.csv(
+  crime_data_clean, 
+  "crime_data_clean.csv", 
+  row.names = FALSE # Prevents write.csv from adding another row number column
+)
+
+# clean data
+cat("Data cleaning complete. Here are the first few rows of the clean data:\n")
+print(head(crime_data_clean))
+
+cat("\nAnd here is the structure of the data, showing 'Total_Crimes' is now numeric:\n")
+str(crime_data_clean)
