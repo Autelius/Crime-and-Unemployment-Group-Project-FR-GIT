@@ -1,0 +1,170 @@
+"","Year","Region","Total_Crimes"
+"1","2013","Nederland",1105565
+"2","2014","Nederland",1025630
+"3","2015","Nederland",978945
+"4","2016","Nederland",930325
+"5","2017","Nederland",832950
+"6","2018","Nederland",786420
+"7","2019","Nederland",821905
+"8","2020","Nederland",813150
+"9","2021","Nederland",758065
+"10","2022","Nederland",810550
+"11","2023*","Nederland",816375
+"12","2024*","Nederland",811885
+"13","2013","Groningen (PV)",34450
+"14","2014","Groningen (PV)",30715
+"15","2015","Groningen (PV)",30065
+"16","2016","Groningen (PV)",29570
+"17","2017","Groningen (PV)",24990
+"18","2018","Groningen (PV)",24065
+"19","2019","Groningen (PV)",24935
+"20","2020","Groningen (PV)",23830
+"21","2021","Groningen (PV)",23350
+"22","2022","Groningen (PV)",25390
+"23","2023*","Groningen (PV)",26885
+"24","2024*","Groningen (PV)",26030
+"25","2013","Fryslân (PV)",28760
+"26","2014","Fryslân (PV)",27620
+"27","2015","Fryslân (PV)",26585
+"28","2016","Fryslân (PV)",24600
+"29","2017","Fryslân (PV)",21140
+"30","2018","Fryslân (PV)",22010
+"31","2019","Fryslân (PV)",22260
+"32","2020","Fryslân (PV)",22135
+"33","2021","Fryslân (PV)",20380
+"34","2022","Fryslân (PV)",21135
+"35","2023*","Fryslân (PV)",21060
+"36","2024*","Fryslân (PV)",20590
+"37","2013","Drenthe (PV)",23110
+"38","2014","Drenthe (PV)",21470
+"39","2015","Drenthe (PV)",20090
+"40","2016","Drenthe (PV)",18660
+"41","2017","Drenthe (PV)",16480
+"42","2018","Drenthe (PV)",15675
+"43","2019","Drenthe (PV)",17205
+"44","2020","Drenthe (PV)",17915
+"45","2021","Drenthe (PV)",16810
+"46","2022","Drenthe (PV)",17510
+"47","2023*","Drenthe (PV)",16975
+"48","2024*","Drenthe (PV)",15725
+"49","2013","Overijssel (PV)",60990
+"50","2014","Overijssel (PV)",54065
+"51","2015","Overijssel (PV)",50580
+"52","2016","Overijssel (PV)",48590
+"53","2017","Overijssel (PV)",43450
+"54","2018","Overijssel (PV)",42275
+"55","2019","Overijssel (PV)",43085
+"56","2020","Overijssel (PV)",44665
+"57","2021","Overijssel (PV)",41700
+"58","2022","Overijssel (PV)",46490
+"59","2023*","Overijssel (PV)",43630
+"60","2024*","Overijssel (PV)",43995
+"61","2013","Flevoland (PV)",26000
+"62","2014","Flevoland (PV)",23335
+"63","2015","Flevoland (PV)",21550
+"64","2016","Flevoland (PV)",20830
+"65","2017","Flevoland (PV)",18685
+"66","2018","Flevoland (PV)",18205
+"67","2019","Flevoland (PV)",19270
+"68","2020","Flevoland (PV)",18875
+"69","2021","Flevoland (PV)",16920
+"70","2022","Flevoland (PV)",17325
+"71","2023*","Flevoland (PV)",17220
+"72","2024*","Flevoland (PV)",17530
+"73","2013","Gelderland (PV)",112985
+"74","2014","Gelderland (PV)",102230
+"75","2015","Gelderland (PV)",95195
+"76","2016","Gelderland (PV)",92785
+"77","2017","Gelderland (PV)",81715
+"78","2018","Gelderland (PV)",76855
+"79","2019","Gelderland (PV)",82735
+"80","2020","Gelderland (PV)",84115
+"81","2021","Gelderland (PV)",79110
+"82","2022","Gelderland (PV)",82250
+"83","2023*","Gelderland (PV)",79960
+"84","2024*","Gelderland (PV)",79340
+"85","2013","Utrecht (PV)",79440
+"86","2014","Utrecht (PV)",75820
+"87","2015","Utrecht (PV)",74175
+"88","2016","Utrecht (PV)",72070
+"89","2017","Utrecht (PV)",66560
+"90","2018","Utrecht (PV)",63445
+"91","2019","Utrecht (PV)",65570
+"92","2020","Utrecht (PV)",64250
+"93","2021","Utrecht (PV)",57535
+"94","2022","Utrecht (PV)",59435
+"95","2023*","Utrecht (PV)",62015
+"96","2024*","Utrecht (PV)",60350
+"97","2013","Noord-Holland (PV)",222530
+"98","2014","Noord-Holland (PV)",207610
+"99","2015","Noord-Holland (PV)",202670
+"100","2016","Noord-Holland (PV)",189710
+"101","2017","Noord-Holland (PV)",171760
+"102","2018","Noord-Holland (PV)",162985
+"103","2019","Noord-Holland (PV)",166930
+"104","2020","Noord-Holland (PV)",156670
+"105","2021","Noord-Holland (PV)",144990
+"106","2022","Noord-Holland (PV)",161575
+"107","2023*","Noord-Holland (PV)",168695
+"108","2024*","Noord-Holland (PV)",169585
+"109","2013","Zuid-Holland (PV)",254775
+"110","2014","Zuid-Holland (PV)",237745
+"111","2015","Zuid-Holland (PV)",224970
+"112","2016","Zuid-Holland (PV)",218565
+"113","2017","Zuid-Holland (PV)",197600
+"114","2018","Zuid-Holland (PV)",181550
+"115","2019","Zuid-Holland (PV)",190650
+"116","2020","Zuid-Holland (PV)",193930
+"117","2021","Zuid-Holland (PV)",180340
+"118","2022","Zuid-Holland (PV)",192075
+"119","2023*","Zuid-Holland (PV)",192260
+"120","2024*","Zuid-Holland (PV)",193940
+"121","2013","Zeeland (PV)",19120
+"122","2014","Zeeland (PV)",17180
+"123","2015","Zeeland (PV)",16840
+"124","2016","Zeeland (PV)",15560
+"125","2017","Zeeland (PV)",13540
+"126","2018","Zeeland (PV)",12725
+"127","2019","Zeeland (PV)",13490
+"128","2020","Zeeland (PV)",14220
+"129","2021","Zeeland (PV)",13535
+"130","2022","Zeeland (PV)",14135
+"131","2023*","Zeeland (PV)",13560
+"132","2024*","Zeeland (PV)",14260
+"133","2013","Noord-Brabant (PV)",164440
+"134","2014","Noord-Brabant (PV)",152130
+"135","2015","Noord-Brabant (PV)",145560
+"136","2016","Noord-Brabant (PV)",135220
+"137","2017","Noord-Brabant (PV)",118795
+"138","2018","Noord-Brabant (PV)",112580
+"139","2019","Noord-Brabant (PV)",119540
+"140","2020","Noord-Brabant (PV)",120340
+"141","2021","Noord-Brabant (PV)",113905
+"142","2022","Noord-Brabant (PV)",119240
+"143","2023*","Noord-Brabant (PV)",120235
+"144","2024*","Noord-Brabant (PV)",117060
+"145","2013","Limburg (PV)",77580
+"146","2014","Limburg (PV)",74285
+"147","2015","Limburg (PV)",68995
+"148","2016","Limburg (PV)",63025
+"149","2017","Limburg (PV)",56585
+"150","2018","Limburg (PV)",52330
+"151","2019","Limburg (PV)",54315
+"152","2020","Limburg (PV)",51270
+"153","2021","Limburg (PV)",48790
+"154","2022","Limburg (PV)",53275
+"155","2023*","Limburg (PV)",53010
+"156","2024*","Limburg (PV)",52860
+"157","2013","Niet in te delen (PV)",1380
+"158","2014","Niet in te delen (PV)",1420
+"159","2015","Niet in te delen (PV)",1665
+"160","2016","Niet in te delen (PV)",1135
+"161","2017","Niet in te delen (PV)",1640
+"162","2018","Niet in te delen (PV)",1720
+"163","2019","Niet in te delen (PV)",1920
+"164","2020","Niet in te delen (PV)",935
+"165","2021","Niet in te delen (PV)",700
+"166","2022","Niet in te delen (PV)",725
+"167","2023*","Niet in te delen (PV)",865
+"168","2024*","Niet in te delen (PV)",615
+"169",NA,NA,NA
