@@ -170,20 +170,19 @@ ggplot(nl_prov) + geom_sf(fill = "lightgrey") + theme_void()
 install.packages(c("sf", "dplyr", "readr", "tmap"))   # tmap is optional but handy
 
 
+
+
 # ------------------------------------------------------------
-#  Crime-per-capita choropleth – Dutch provinces
-# ------------------------------------------------------------
-#  ONE-TIME setup (uncomment if you haven't done this before):
 #  install.packages(c("sf", "dplyr", "readr", "tmap"))
 #  -----------------------------------------------------------
 
-# 1. Load the libraries --------------------------------------
+# 1. Load the libraries 
 library(sf)       # spatial data
 library(dplyr)    # data wrangling
 library(readr)    # fast CSV reader
 library(tmap)     # thematic mapping
 
-# 2. Read your crime table -----------------------------------
+# 2. Reading the crime table
 crime <- read_csv("data/working_data/final_merged_panel_data.csv") %>%
   mutate(
     province = sub(" \\(PV\\)$", "", Regio.s),
