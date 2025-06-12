@@ -4,7 +4,7 @@ crime_data_filtered <- crime_data_clean[crime_data_clean$Year > 2012, ]
 crime_data_filtered_transpose<- t(crime_data_filtered)
 #adding filterd data to data folder
 write.csv(crime_data_filtered_transpose, "data/working_data_crime.csv")
-# Load required package
+# install tidyverse
 install.packages("tidyverse")
 library(tidyverse)
 # adding data to data folder
