@@ -78,10 +78,106 @@ str(crime_data_clean)
 
 
 
-dat <- read.csv("unemployment_data_clean.csv",        
+dat <- read.csv("data/unemployment_data_clean.csv",        
                 stringsAsFactors = FALSE)
 
 
 dat_t <- as.data.frame(t(dat))
 
 head(dat_t)
+
+write.csv(dat_t, "data/dat_t.csv")
+
+
+
+
+
+
+
+# ---- 1.  Very small set of packages --------------------------------
+# run this INSTALL line just once
+install.packages(c("sf", "ggplot2", "readr", "gganimate", "dplyr", "viridis"))
+
+library(sf)          # maps
+library(ggplot2)     # plotting
+library(readr)       # read_csv()
+library(dplyr)       # joins / pipes
+library(gganimate)   # slider
+library(viridis)     # colour-blind-safe scale
+
+# ---- 2.  Read your panel -------------------------------------------
+crime <- read_csv("panel_data_crime.csv")      # columns: Year, Region, Total_Crimes
+
+# ---- 3.  Get the official province shapes (CBS via PDOK) -----------
+prov <- st_read(
+  "https://service.pdok.nl/cbs/gebiedsindelingen/2024_1/"
+  |> paste0("geojson/cbs_gebiedsindelingen_2024_1_provincie.geojson"),
+  quiet = TRUE
+) |>
+  select(statnaam, geometry)                   # keep only name + geometry
+
+# ---- 4.  Join shapes with crime data -------------------------------
+mapdf <- prov |>
+  left_join(crime, by = c(statnaam = "Region")) |>
+  filter(!is.na(Total_Crimes))                 # drop rows with no data
+
+# ---- 5.  Build the map and add the slider --------------------------
+p <- ggplot(mapdf) +
+  geom_sf(aes(fill = Total_Crimes)) +
+  scale_fill_viridis_c() +
+  theme_void() +
+  labs(title = "Registered crimes by province",
+       subtitle = "Year: {frame_time}",
+       fill = "Crimes") +
+  transition_time(Year)                        # << slider comes from here
+
+# ---- 6.  Render to a small HTML file you can open in any browser ----
+anim <- animate(p, renderer = html_renderer(), width = 650, height = 700, fps = 4)
+anim_save("crime_nl_provinces.html", animation = anim)
+
+
+
+
+install.packages("readxl")   # for reading Excel files
+install.packages("readr")    # for writing CSV files
+
+library(readxl)
+library(readr)
+
+crime_data <- read_excel("crimedata.xlsx")
+
+write_csv(crime_data, "crimedata.csv")
+
+
+
+# install once
+install.packages(c("sf", "ggplot2"))
+
+library(sf)
+library(ggplot2)
+
+# 1. read the GeoJSON straight from PDOK -----------------------------
+nl_prov <- st_read(
+  "https://cartomap.github.io/nl/wgs84/provincie_2014.geojson",
+  quiet = TRUE
+)
+
+# 2. quick visual check ---------------------------------------------
+ggplot(nl_prov) + geom_sf(fill = "lightgrey") + theme_void()
+
+
+
+install.packages("cbsodataR")
+library(cbsodataR)
+cbs_maps <- cbs_get_maps()
+# the layout of the data.frame is:
+str(cbs_maps)
+
+
+
+
+
+
+
+
+
