@@ -138,32 +138,12 @@ anim_save("crime_nl_provinces.html", animation = anim)
 
 
 
-install.packages("readxl")   # for reading Excel files
-install.packages("readr")    # for writing CSV files
-
-library(readxl)
-library(readr)
-
-crime_data <- read_excel("crimedata.xlsx")
-
-write_csv(crime_data, "crimedata.csv")
-
-
 
 # install once
 install.packages(c("sf", "ggplot2"))
 
 library(sf)
 library(ggplot2)
-
-# 1. read the GeoJSON straight from PDOK -----------------------------
-nl_prov <- st_read(
-  "https://cartomap.github.io/nl/wgs84/provincie_2014.geojson",
-  quiet = TRUE
-)
-
-# 2. quick visual check ---------------------------------------------
-ggplot(nl_prov) + geom_sf(fill = "lightgrey") + theme_void()
 
 
 
@@ -174,10 +154,63 @@ cbs_maps <- cbs_get_maps()
 str(cbs_maps)
 
 
+# 1. read the GeoJSON straight from PDOK 
+nl_prov <- st_read(
+  "https://cartomap.github.io/nl/wgs84/provincie_2014.geojson",
+  quiet = TRUE
+)
+
+# 2. quick visual check 
+ggplot(nl_prov) + geom_sf(fill = "lightgrey") + theme_void()
 
 
 
 
+# merging crime per capita and provincial map
+install.packages(c("sf", "dplyr", "readr", "tmap"))   # tmap is optional but handy
 
 
 
+
+# ------------------------------------------------------------
+#  install.packages(c("sf", "dplyr", "readr", "tmap"))
+#  -----------------------------------------------------------
+
+# 1. Load the libraries 
+library(sf)       # spatial data
+library(dplyr)    # data wrangling
+library(readr)    # fast CSV reader
+library(tmap)     # thematic mapping
+
+# 2. Reading the crime table
+crime <- read_csv("data/working_data/final_merged_panel_data.csv") %>%
+  mutate(
+    province = sub(" \\(PV\\)$", "", Regio.s),
+    province = recode(province,                         # ← fixes the spelling
+                      "Fryslân" = "Friesland") # drop " (PV)" suffix if present
+  ) %>%
+  filter(!province %in% "Nederland")            # keep only the provinces
+
+# 3. Read the GeoJSON of provinces ---------------------------
+# CBS map files use columns 'statcode' (id) and 'statnaam' (name)  :contentReference[oaicite:0]{index=0}
+prov_shapes <- read_sf("https://cartomap.github.io/nl/wgs84/provincie_2014.geojson")
+
+# 4. Join your data with the shapes --------------------------
+nl_crime <- prov_shapes %>%
+  left_join(crime, by = c("statnaam" = "province"))
+
+# 5. Draw an interactive map with tmap -----------------------
+tmap_mode("view")  # 'plot' for static maps; 'view' gives leaflet interactivity
+
+tm_shape(nl_crime) +
+  tm_polygons(
+    col        = "per_capita",       # <-- replace with the exact column name in your CSV
+    palette    = "Reds",
+    style      = "quantile",
+    border.col = "white",
+    id         = "statnaam",
+    popup.vars = c("Crime per capita" = "per_capita")
+  ) +
+  tm_layout(
+    title = "Crime per capita by Dutch province"
+  )
