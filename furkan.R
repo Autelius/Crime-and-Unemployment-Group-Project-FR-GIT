@@ -138,32 +138,12 @@ anim_save("crime_nl_provinces.html", animation = anim)
 
 
 
-install.packages("readxl")   # for reading Excel files
-install.packages("readr")    # for writing CSV files
-
-library(readxl)
-library(readr)
-
-crime_data <- read_excel("crimedata.xlsx")
-
-write_csv(crime_data, "crimedata.csv")
-
-
 
 # install once
 install.packages(c("sf", "ggplot2"))
 
 library(sf)
 library(ggplot2)
-
-# 1. read the GeoJSON straight from PDOK -----------------------------
-nl_prov <- st_read(
-  "https://cartomap.github.io/nl/wgs84/provincie_2014.geojson",
-  quiet = TRUE
-)
-
-# 2. quick visual check ---------------------------------------------
-ggplot(nl_prov) + geom_sf(fill = "lightgrey") + theme_void()
 
 
 
@@ -172,6 +152,20 @@ library(cbsodataR)
 cbs_maps <- cbs_get_maps()
 # the layout of the data.frame is:
 str(cbs_maps)
+
+
+# 1. read the GeoJSON straight from PDOK 
+nl_prov <- st_read(
+  "https://cartomap.github.io/nl/wgs84/provincie_2014.geojson",
+  quiet = TRUE
+)
+
+# 2. quick visual check 
+ggplot(nl_prov) + geom_sf(fill = "lightgrey") + theme_void()
+
+
+
+
 
 
 
