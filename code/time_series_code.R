@@ -13,6 +13,23 @@ ggplot(pivotdata_set, aes(x = year, y = value, colour = mvar)) +
   labs(title = "line graph of unemployment and crime through time", x = "time", y = "Value") +
   scale_x_continuous(breaks = seq(2013, 2024, by = 2), limits = c(2012, 2025))
 
+##time series, using province data##
+
+#first excluding aggregate data and making a long pivot#
+
+merged_data2 <- merged_data[13:156, ]
+
+pivotmerged <- pivot_longer(merged_data2, cols = c(unemployment, crime_per_capita), names_to = "mvar", values_to = "value")
+
+#then making the graph 
+
+ggplot(pivotmerged, aes(x = year, y = value, colour = mvar)) + 
+  geom_smooth(method = "loess", span = 0.2, se = FALSE) +
+  labs(x = "time(year)", y = "variable") +
+  scale_x_continuous(breaks = seq(2013, 2024, by = 2), limits = c(2012, 2025))
+
+
+
 
 
 
