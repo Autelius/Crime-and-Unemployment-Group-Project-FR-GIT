@@ -14,12 +14,12 @@ library(readr)    # fast CSV reader
 library(tmap)     # thematic mapping
 
 # 2. Reading the crime table
-crime <- read_csv("data/working_data/final_merged_panel_data.csv") %>%
-  mutate(
-    province = sub(" \\(PV\\)$", "", Regio.s),
-    province = recode(province,                         # ← fixes the spelling
-                      "Fryslân" = "Friesland") # drop " (PV)" suffix if present
-  ) %>%
+crime <- read_csv("data/working_data/merged_panel_data_final.csv") %>%
+    mutate(
+      province = sub(" \\(PV\\)$", "", Regio.s),
+      province = recode(province,                         # ← fixes the spelling
+                        "Fryslân" = "Friesland") # drop " (PV)" suffix if present
+    ) %>%
   filter(!province %in% "Nederland")            # keep only the provinces
 
 # 3. Read the GeoJSON of provinces ---------------------------
