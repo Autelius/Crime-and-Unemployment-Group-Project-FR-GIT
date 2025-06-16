@@ -45,3 +45,4 @@ tm_shape(nl_crime) +
   tm_layout(
     title = "Crime per capita by Dutch province"
   )
+
