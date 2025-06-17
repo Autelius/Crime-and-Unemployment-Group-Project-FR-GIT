@@ -113,3 +113,56 @@ tm_shape(nl_pop) +
     popup.vars = c("Population density" = "poplation_density")
   ) +
   tm_title("Population density by Dutch province - 2023")
+
+
+
+
+
+
+# Unemployment rate by province - 2023
+
+library(sf)
+library(dplyr)
+library(readr)
+library(tmap)
+
+
+# Reading the CSV data for 2023
+data <- read_csv("data/working_data/merged_panel_data_final.csv",
+                 show_col_types = FALSE) |>
+  filter(year == 2023) |>
+  mutate(
+    province = sub(" \\(PV\\)$", "", province),
+    province = recode(province, "Fryslân" = "Friesland")
+  ) |>
+  filter(!province %in% "Nederland")
+
+
+# 2.  Read the province shapes from the GeoJSON source
+prov_shapes <- read_sf("https://cartomap.github.io/nl/wgs84/provincie_2014.geojson")
+
+
+# 3.  Joinining the data to the province shapes
+nl_data <- prov_shapes |>
+  left_join(data, by = c("statnaam" = "province"))
+
+
+# 4.  Drawing the unemployment map
+tmap_mode("view")
+
+tm_shape(nl_data) +
+  tm_polygons(
+    col        = "unemployment_rate",
+    style      = "quantile",
+    palette    = "Greens",
+    border.col = "white",
+    id         = "statnaam",
+    popup.vars = c(
+      "Province" = "statnaam",
+      "Unemployment Rate (2023)" = "unemployment_rate"
+    )
+  ) +
+  
+  tm_layout(
+    title = "Unemployment Rate by Dutch province – 2023"
+  )
