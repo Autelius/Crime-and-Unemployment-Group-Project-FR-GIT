@@ -28,3 +28,4 @@ ggplot(crime2021, aes(x = leeftijdcat, y = crime)) +
     y = "Suspects per 10,000 Inhabitants"
   ) 
 
+
