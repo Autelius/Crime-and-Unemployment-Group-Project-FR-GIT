@@ -1,6 +1,8 @@
 ---
-title: "Template"
-author: "Studentnames and studentnumbers here"
+title: The relationship between unemployment and crime in the Netherlands
+author: Romeo Schoonderbeek, 2868407
+        Paul Claessens, 2859603
+        
 date: "`r Sys.Date()`"
 output: pdf_document
 ---

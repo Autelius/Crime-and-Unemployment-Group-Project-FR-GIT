@@ -1,68 +1,100 @@
+####################################################################
+####I NNITIALIZING #################################################
+####################################################################
 
-#merging unemployement_panel_data and total_crime_panel_data
+library(dplyr)
+library(readr)
+library(tidyverse)
+library(ggplot2)
 
-merged_data <- cbind(unemployement_panel_data, crime_panel_data[, 4])
+DS_Panel_Unemployment <- read.csv("data/working_data/panel_data_unemployement.csv")
+DS_Panel_Crime <- read.csv("data/working_data/panel_data_crime.csv")
+DS_Population <- read.csv("data/population_data.csv")
 
-#merging population data and merged_data
+####################################################################
+##### merging unemployement_panel_data and total_crime_panel_data ##
+####################################################################
 
-merged_data <-cbind(merged_data, population_data[, 4])
+merged_data <- cbind(DS_Panel_Unemployment, DS_Panel_Crime [, 5])
 
-#creating a new variable: crime per capita
+####################################################################
+#### merging population data and merged_data #######################
+####################################################################
 
-merged_data <- mutate(merged_data, per_capita = (Total_Crimes/Population)*100)
+merged_data <-cbind(merged_data, DS_Population [, 4])
 
-write.csv(merged_data, "data/working_data/final_merged_panel_data.csv")
+####################################################################
+#### renaming columns for clarity, and removing column 1,2 #########
+####################################################################
 
-####cleaning area per province data####
+merged_data <- merged_data [, -c(1:2)] 
+colnames(merged_data) <- c("Year", "province", "Unemployment_Rate", "total_Crimes", "Population")
+  
+####################################################################
+#### creating a new variable: crime per capita #####################
+####################################################################
 
-area_data <- Volkstelling_oppervlakten_1930_14062025_133850
+merged_data <- mutate(merged_data, crimes_per_capita = (total_Crimes/Population)*100)
 
-area_data_working <- area_data[, c(1, 5)]
+write.csv(merged_data, "data/working_data/merged_panel_data_final.csv")
 
-colnames(area_data_working) = c("province", "Area(KM2)")
+####################################################################
+#### cleaning area per province data ###############################
+####################################################################
 
-# removing NA rows
+area_data_working <- read.csv("data/raw_data/area_data.csv")
+
+colnames(area_data_working) = c("X", "province", "Area(KM2)")
+
+####################################################################
+#### removing NA rows and converting hectares to km2 ###############
+####################################################################
 
 area_data_working <- area_data_working[6:17 ,]
 
-#converting hectares to km2
+area_data_working[[3]]  = as.numeric(area_data_working[[3]])
 
-area_data_working[[2]]  = as.numeric(area_data_working[[2]])
+area_data_working[, 3] = area_data_working[, 3]/ 100
 
-area_data_working[, 2] = area_data_working[, 2]/ 100
-
-# add flevoland
+####################################################################
+#### add flevoland to area_data_working ############################
+####################################################################
 
 flevoland <- data.frame(name = "Flevoland", value = 1417 )
 colnames(flevoland) = c("province", "Area(KM2)")
 
 area_data_working <- bind_rows(
-  area_data_working[1:5, ], 
-  flevoland, 
+  area_data_working[1:5, ], flevoland,  
   area_data_working[6:nrow(area_data_working), ]
-  
 )
 
-# now we transform this dataset such that every province repeats 12 times
+####################################################################
+##### now we transform area_data_working such that every province ##
+##### repeats 12 times #############################################
+####################################################################
 
 area_data_working <- area_data_working %>%
   slice(rep(1:n(), each = 12))
 
-# now we cbind this result in the merged_data_set
+####################################################################
+#### now we cbind this result in the merged_data_set and adjusting #
+#### colnames for clarity ##########################################
+####################################################################
 
-final_merged_panel_data <- cbind(final_merged_panel_data, area_data_working[, 2])
+merged_panel_data_final <- cbind(merged_data, area_data_working[, 3])
 
-# cleaning data set more by adjusting colnames and deleteting unnessary columns
+colnames(merged_panel_data_final) <- c("year", "province", "unemployment_rate", "total_crimes", "population", "crimes_per_capita", "area_km2")
 
-final_merged_panel_data <- final_merged_panel_data[, -1]
+####################################################################
+#### create a new variable: population density #####################
+####################################################################
 
-colnames(final_merged_panel_data) <- c("year", "province", "unemployment_rate", "total_crimes", "population", "crimes_per_capita", "area_km2")
+merged_panel_data_final <- mutate(merged_panel_data_final, poplation_density = population/area_km2)
 
-#create a new variable: population density
-
-final_merged_panel_data <- mutate(final_merged_panel_data, poplation_density = population/area_km2)
-
-write.csv(final_merged_panel_data, "data/working_data/merged_panel_data_final.csv")
+write.csv(merged_panel_data_final, "data/working_data/merged_panel_data_final.csv")
 
 
+####################################################################
+#### Done :)! ######################################################
+####################################################################
 
