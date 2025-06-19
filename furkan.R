@@ -177,40 +177,108 @@ install.packages(c("sf", "dplyr", "readr", "tmap"))   # tmap is optional but han
 #  -----------------------------------------------------------
 
 # 1. Load the libraries 
+library(sf)
+library(dplyr)
+library(readr)
+library(tmap)
+
+# ----------------------------------------------------------
+# 1.  Read the CSV  → keep 2023 only
+# ----------------------------------------------------------
+crime <- read_csv("data/working_data/merged_panel_data_final.csv",
+                  show_col_types = FALSE) |>
+  filter(year == 2023) |>
+  mutate(
+    province = sub(" \\(PV\\)$", "", province),        # use the *province* column
+    province = recode(province, "Fryslân" = "Friesland")
+  ) |>
+  filter(!province %in% "Nederland")
+
+# ----------------------------------------------------------
+# 2.  Province shapes (CBS 2014)
+# ----------------------------------------------------------
+prov_shapes <- read_sf("https://cartomap.github.io/nl/wgs84/provincie_2014.geojson")
+
+# ----------------------------------------------------------
+# 3.  Join data → map
+# ----------------------------------------------------------
+nl_crime <- prov_shapes |>
+  left_join(crime, by = c("statnaam" = "province"))
+
+# ----------------------------------------------------------
+# 4.  Drawing
+# ----------------------------------------------------------
+
+tm_shape(nl_crime) +
+  tm_polygons(
+    col        = "crimes_per_capita",
+    style      = "quantile",                   # Method for breaking data into intervals
+    palette    = "Reds",                       # Correct argument to set the color palette
+    border.col = "white",
+    id         = "statnaam",                       # Using "name" from the NLD_prov dataset
+    statnaam = c("Province" = "name", "Crime per capita (dummy)" = "crimes_per_capita")
+  ) +
+  tm_layout(
+    title = "Crime per capita by Dutch province – 2023"
+  )
+
+
+
+
+
+
+# for the pop density map 
+
 library(sf)       # spatial data
 library(dplyr)    # data wrangling
 library(readr)    # fast CSV reader
 library(tmap)     # thematic mapping
 
-# 2. Reading the crime table
-crime <- read_csv("data/working_data/final_merged_panel_data.csv") %>%
+pop <- read_csv("data/working_data/merged_panel_data_final.csv",
+                show_col_types = FALSE) |>
+  filter(year== 2023) |>
   mutate(
-    province = sub(" \\(PV\\)$", "", Regio.s),
-    province = recode(province,                         # ← fixes the spelling
-                      "Fryslân" = "Friesland") # drop " (PV)" suffix if present
-  ) %>%
-  filter(!province %in% "Nederland")            # keep only the provinces
+    region = sub(" \\(PV\\)$", "", province),      # <- use the province column
+    region = recode(region, "Fryslân" = "Friesland")
+  ) |>
+  filter(!region %in% "Nederland")               # keep only provinces
 
-# 3. Read the GeoJSON of provinces ---------------------------
-# CBS map files use columns 'statcode' (id) and 'statnaam' (name)  :contentReference[oaicite:0]{index=0}
-prov_shapes <- read_sf("https://cartomap.github.io/nl/wgs84/provincie_2014.geojson")
 
-# 4. Join your data with the shapes --------------------------
-nl_crime <- prov_shapes %>%
-  left_join(crime, by = c("statnaam" = "province"))
+# map form cbs
 
-# 5. Draw an interactive map with tmap -----------------------
-tmap_mode("view")  # 'plot' for static maps; 'view' gives leaflet interactivity
+shapes <- read_sf("https://cartomap.github.io/nl/wgs84/provincie_2014.geojson")
 
-tm_shape(nl_crime) +
+#    shapes carries columns:  statcode (id)  statnaam (human name)  geometry
+
+
+# Fixing the names
+
+pop <- pop |> mutate(
+  region = recode(region,
+                  "Fryslân" = "Friesland")
+)
+
+
+# Joining the map with data 
+
+nl_pop <- shapes |>
+  left_join(pop, by = c("statnaam" = "region"))
+
+
+# Drawing tmap v4 syntax
+
+tmap_mode("view")   # 'plot' for static maps; 'view' gives leaflet interactivity
+
+tm_shape(nl_pop) +
   tm_polygons(
-    col        = "per_capita",       # <-- replace with the exact column name in your CSV
-    palette    = "Reds",
-    style      = "quantile",
+    col        = "poplation_density",           
+    fill.scale = tm_scale_intervals(style = "quantile",
+                                    values = "viridis"),
     border.col = "white",
     id         = "statnaam",
-    popup.vars = c("Crime per capita" = "per_capita")
+    popup.vars = c("Population density" = "poplation_density")
   ) +
-  tm_layout(
-    title = "Crime per capita by Dutch province"
-  )
+  tm_title("Population density by Dutch province")
+
+
+
