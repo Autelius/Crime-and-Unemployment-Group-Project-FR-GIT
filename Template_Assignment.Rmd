@@ -2,6 +2,7 @@
 title: The relationship between unemployment and crime in the Netherlands
 author: Romeo Schoonderbeek, 2868407
         Paul Claessens, 2859603
+Lecturer : Jack Flitzgerald, Chantal Schouwenaar
         
 date: "`r Sys.Date()`"
 output: pdf_document
@@ -16,14 +17,6 @@ install.packages("tidyverse")
 ```{r packages}
 require(tidyverse)
 ```
-
-# Title Page
-
-Include your names
-
-Include the tutorial group number
-
-Include your tutorial lecturer's name
 
 # Part 1 - Identify a Social Problem
 
@@ -41,14 +34,18 @@ Include the following:
 
 ## 2.1 Load in the data
 
-Preferably from a URL, but if not, make sure to download the data and store it in a shared location that you can load the data in from. Do not store the data in a folder you include in the Github repository!
-
 ```{r loading_data}
-dataset <- midwest
+DS_Panel_Unemployment <- read.csv("data/working_data/panel_data_unemployement.csv")
+DS_Panel_Crime <- read.csv("data/working_data/panel_data_crime.csv")
+DS_Population <- read.csv("data/population_data.csv")
+area_data_working <- read.csv("data/raw_data/area_data.csv")
+
+###### not raw data, isert raw data from cvs (possible that some additional cleaning should be done)
+
+agg_unemployment <- read.csv("data/raw_data/aggragate_total_unemployment.csv")
+agg_crime <- read.csv("data/raw_data/aggragate_total_crime.csv")
+agg_population <- read.csv("data/raw_data/population_data_raw.csv")
 ```
-
-midwest is an example dataset included in the tidyverse package
-
 ## 2.2 Provide a short summary of the dataset(s)
 
 ```{r}
@@ -77,10 +74,51 @@ Think of things like:
 
 ## 3.1 Data cleaning
 
-Say we want to include only larger distances (above 2) in our dataset, we can filter for this.
+CBS datasets already come in panel data form. Data cleaning will include removing unncessary rows and columns, adjusting data frames and merging data sets. 3 main data sets are used. Province panel data, aggregate panel data and data sets used for sub population analysis. 
 
-```{r data_cleaning}
-mean(dataset$percollege)
+```{r}
+# province panel data cleaning
+
+merged_data <- cbind(DS_Panel_Unemployment, DS_Panel_Crime [, 5])
+
+merged_data <-cbind(merged_data, DS_Population [, 4])
+
+merged_data <- merged_data [, -c(1:2)] 
+colnames(merged_data) <- c("Year", "province", "Unemployment_Rate", "total_Crimes", "Population")
+
+merged_data <- mutate(merged_data, crimes_per_capita = (total_Crimes/Population)*100)
+
+write.csv(merged_data, "data/working_data/merged_panel_data_final.csv")
+
+area_data_working <- read.csv("data/raw_data/area_data.csv")
+
+colnames(area_data_working) = c("X", "province", "Area(KM2)")
+
+area_data_working <- area_data_working[6:17 ,]
+
+area_data_working[[3]]  = as.numeric(area_data_working[[3]])
+
+area_data_working[, 3] = area_data_working[, 3]/ 100
+
+flevoland <- data.frame(name = "Flevoland", value = 1417 )
+colnames(flevoland) = c("province", "Area(KM2)")
+
+area_data_working <- bind_rows(
+  area_data_working[1:5, ], flevoland,  
+  area_data_working[6:nrow(area_data_working), ]
+)
+
+area_data_working <- area_data_working %>%
+  slice(rep(1:n(), each = 12))
+
+merged_panel_data_final <- cbind(merged_data, area_data_working[, 3])
+
+colnames(merged_panel_data_final) <- c("year", "province", "unemployment_rate", "total_crimes", "population", "crimes_per_capita", "area_km2")
+
+merged_panel_data_final <- mutate(merged_panel_data_final, poplation_density = population/area_km2)
+
+# aggregate data cleaning
+
 ```
 
 Please use a separate 'R block' of code for each type of cleaning. So, e.g. one for missing values, a new one for removing unnecessary variables etc.
