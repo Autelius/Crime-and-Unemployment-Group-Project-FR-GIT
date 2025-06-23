@@ -107,7 +107,7 @@
 
 \title{Template}
 \author{Studentnames and studentnumbers here}
-\date{2025-06-12}
+\date{2025-06-19}
 
 \begin{document}
 \maketitle
@@ -270,6 +270,140 @@ variation}\label{visualize-temporal-variation}
 
 \subsection{3.4 Visualize spatial
 variation}\label{visualize-spatial-variation}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(sf)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(cbsodataR)}
+\FunctionTok{library}\NormalTok{(dplyr)       }
+\FunctionTok{library}\NormalTok{(readr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cbs\_maps }\OtherTok{\textless{}{-}} \FunctionTok{cbs\_get\_maps}\NormalTok{()}
+\CommentTok{\# the layout of the data.frame is:}
+\FunctionTok{str}\NormalTok{(cbs\_maps)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    620 obs. of  4 variables:
+##  $ region: chr  "arbeidsmarktregio" "arbeidsmarktregio" "arbeidsmarktregio" "arbeidsmarktregio" ...
+##  $ year  : int  2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 ...
+##  $ wgs84 : chr  "https://cartomap.github.io/nl/wgs84/arbeidsmarktregio_2014.geojson" "https://cartomap.github.io/nl/wgs84/arbeidsmarktregio_2015.geojson" "https://cartomap.github.io/nl/wgs84/arbeidsmarktregio_2016.geojson" "https://cartomap.github.io/nl/wgs84/arbeidsmarktregio_2017.geojson" ...
+##  $ rd    : chr  "https://cartomap.github.io/nl/rd/arbeidsmarktregio_2014.geojson" "https://cartomap.github.io/nl/rd/arbeidsmarktregio_2015.geojson" "https://cartomap.github.io/nl/rd/arbeidsmarktregio_2016.geojson" "https://cartomap.github.io/nl/rd/arbeidsmarktregio_2017.geojson" ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#read the GeoJSON straight from PDOK }
+\NormalTok{nl\_prov }\OtherTok{\textless{}{-}} \FunctionTok{st\_read}\NormalTok{(}
+  \StringTok{"https://cartomap.github.io/nl/wgs84/provincie\_2014.geojson"}\NormalTok{,}
+  \AttributeTok{quiet =} \ConstantTok{TRUE}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Reading the CSV  →  2023 only}
+\NormalTok{crime }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"data/working\_data/merged\_panel\_data\_final.csv"}\NormalTok{,}
+                  \AttributeTok{show\_col\_types =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2023}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{province =} \FunctionTok{sub}\NormalTok{(}\StringTok{" }\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{(PV}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{)$"}\NormalTok{, }\StringTok{""}\NormalTok{, province),        }
+    \AttributeTok{province =} \FunctionTok{recode}\NormalTok{(province, }\StringTok{"Fryslân"} \OtherTok{=} \StringTok{"Friesland"}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\NormalTok{province }\SpecialCharTok{\%in\%} \StringTok{"Nederland"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Province shapes (CBS 2014)}
+\NormalTok{prov\_shapes }\OtherTok{\textless{}{-}} \FunctionTok{read\_sf}\NormalTok{(}\StringTok{"https://cartomap.github.io/nl/wgs84/provincie\_2014.geojson"}\NormalTok{)}
+
+
+\CommentTok{\# Join data → map}
+\NormalTok{nl\_crime }\OtherTok{\textless{}{-}}\NormalTok{ prov\_shapes }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{left\_join}\NormalTok{(crime, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"statnaam"} \OtherTok{=} \StringTok{"province"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(nl\_crime) }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ crimes\_per\_capita), }\AttributeTok{color =} \StringTok{"white"}\NormalTok{, }\AttributeTok{size =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_gradient}\NormalTok{(}
+    \AttributeTok{low  =} \StringTok{"\#fee5d9"}\NormalTok{,  }\CommentTok{\# pale red}
+    \AttributeTok{high =} \StringTok{"\#a50f15"}\NormalTok{,  }\CommentTok{\# dark red}
+    \AttributeTok{na.value =} \StringTok{"grey90"}\NormalTok{,}
+    \AttributeTok{name =} \StringTok{"Crime}\SpecialCharTok{\textbackslash{}n}\StringTok{per capita"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Crime per capita by Dutch province – 2023"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{panel.grid =} \FunctionTok{element\_blank}\NormalTok{(),}
+    \AttributeTok{axis.text  =} \FunctionTok{element\_blank}\NormalTok{(),}
+    \AttributeTok{axis.ticks =} \FunctionTok{element\_blank}\NormalTok{()}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Template_Assignment_files/figure-latex/unnamed-chunk-6-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(nl\_crime) }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ poplation\_density), }\AttributeTok{color =} \StringTok{"white"}\NormalTok{, }\AttributeTok{size =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_gradient}\NormalTok{(}
+    \AttributeTok{low  =} \StringTok{"\#deebf7"}\NormalTok{,  }\CommentTok{\# pale blue}
+    \AttributeTok{high =} \StringTok{"\#08306b"}\NormalTok{,  }\CommentTok{\# dark blue}
+    \AttributeTok{na.value =} \StringTok{"grey90"}\NormalTok{,}
+    \AttributeTok{name =} \StringTok{"Population}\SpecialCharTok{\textbackslash{}n}\StringTok{density"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Population density by Dutch province – 2023"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{panel.grid =} \FunctionTok{element\_blank}\NormalTok{(),}
+    \AttributeTok{axis.text  =} \FunctionTok{element\_blank}\NormalTok{(),}
+    \AttributeTok{axis.ticks =} \FunctionTok{element\_blank}\NormalTok{()}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Template_Assignment_files/figure-latex/pop-heatmap-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(nl\_crime) }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ unemployment\_rate), }\AttributeTok{color =} \StringTok{"white"}\NormalTok{, }\AttributeTok{size =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_gradient}\NormalTok{(}
+    \AttributeTok{low  =} \StringTok{"\#e5f5e0"}\NormalTok{,  }\CommentTok{\# pale green}
+    \AttributeTok{high =} \StringTok{"\#00441b"}\NormalTok{,  }\CommentTok{\# dark green}
+    \AttributeTok{na.value =} \StringTok{"grey90"}\NormalTok{,}
+    \AttributeTok{name =} \StringTok{"Unemployment}\SpecialCharTok{\textbackslash{}n}\StringTok{rate"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Unemployment rate by Dutch province – 2023"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{panel.grid =} \FunctionTok{element\_blank}\NormalTok{(),}
+    \AttributeTok{axis.text  =} \FunctionTok{element\_blank}\NormalTok{(),}
+    \AttributeTok{axis.ticks =} \FunctionTok{element\_blank}\NormalTok{()}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Template_Assignment_files/figure-latex/unemp-heatmap-1.pdf}}
 
 Here you provide a description of why the plot above is relevant to your
 specific social problem.
