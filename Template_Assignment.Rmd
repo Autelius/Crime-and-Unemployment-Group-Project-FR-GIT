@@ -3,6 +3,9 @@ title: The relationship between unemployment and crime in the Netherlands
 author: Romeo Schoonderbeek, 2868407
         Paul Claessens, 2859603
         Furkan Kadir Öztürk, 2852640 
+        Serena Kula 2856584
+        Bjorn Smit 2812968
+        Lia Seo 2841955
 Lecturer : Jack Flitzgerald, Chantal Schouwenaar
         
 date: "`r Sys.Date()`"
@@ -53,17 +56,17 @@ unemployment_age <- read.csv("data/raw_data/unemployment_per_age.csv")
 
 ## 2.2 Provide a short summary of the dataset's
 
-The data sets are categorized within 3 categories: province level, aggregate and sub population. 
+The data sets are categorized within 3 categories: province level, aggregate and sub population. Since our topic is the relation between crime and unemployment in the Netherlands, these datasets are very suitable. The datasets do not only provide the crime and unemployment data for the Netherlands it self but also on a provincial level and age category, which allows for spatial variation and subpopulation analysis. The main variables used are unemployment rates - total unemployed working population/working population*100 - and amount of crimes registered per year. Since the data sets are classified as panel data sets, unemployment and crime can be compared to each year. Population data sets are used to convert total crime to crime per capita, which allows for population control per province. CBS measures unemployment by surveying 20000 Dutch people of working age who actively seek employment, but are not employed. Population data each year is measured by Basis regristartie personen. And crime data originates from data gathered by the Dutch police. 
 
 ## 2.3 limitations
 
-For crime statistics, Only crimes that are registered are accounted for, however there are also crimes that have not been reported and thus not counted in this dataset. The data does not distinguish if perpratrators were unemployed. So conclusions drawn from this data can never be entirely valid. Additionally, people reported as unemployed might do undeclared work. 
+For crime statistics, only crimes that are registered are accounted for, there are also crimes that have not been reported and thus not counted in the datasets. Furthemore, the data does not distinguish if perpratrators were unemployed. So the validity of the conclusions draw from this data can never be fully verified. Additionally, people reported as unemployed might do undeclared work. 
 
 # Part 3 - Quantifying
 
 ## 3.1 Data cleaning
 
-CBS datasets already come in panel data form. Data cleaning will include removing unnecessary rows and columns, adjusting data frames and merging data sets. 3 main data sets are used. Province panel data, aggregate panel data and data sets used for sub population analysis.
+CBS datasets already come in panel data form. Data cleaning will include removing unnecessary rows and columns, adjusting data frames and merging data sets. 3 main data sets are used. Province panel data, aggregate panel data and data sets used for sub population analysis.Futhermore, certain entries within data sets have to be converted to numerics. Finally column names are given to make the data sets more structured and formal. 
 
 ```{r}
 # province panel data cleaning
@@ -103,9 +106,9 @@ area_data_working <- area_data_working %>%
 merged_panel_data_final <- cbind(merged_data, area_data_working[, 3])
 
 colnames(merged_panel_data_final) <- c("year", "province", "unemployment_rate", "total_crimes", "population", "crimes_per_capita", "area_km2")
+```
 
-
-
+```{r}
 # aggregate data cleaning
 
 agg_unemployment <- agg_unemployment[-c(51,52) ,]
@@ -135,11 +138,9 @@ agg_population <- agg_population[-c(1:75) ,]
 agg_merged <- cbind(agg_merged, agg_population[, 2])
 
 colnames(agg_merged) = c("year", "unemployment", "total_crime", "population")
+```
 
-str(agg_merged)
-
-
-
+```{r}
 # subpopulation
 
 crime2021 <- criminaliteit_per_leeftijd %>% filter(Perioden == "2021")
@@ -164,7 +165,6 @@ unemployment_age$Unemployment <- gsub(",", ".", unemployment_age$Unemployment)
 
 unemployment_age$Unemployment <- as.numeric(unemployment_age$Unemployment)
 ```
-
 ## 3.2 Generate necessary variables
 
 Variable 1 and 2 (Crimes per capita and population density)
@@ -199,7 +199,6 @@ ggplot(pivot_agg_data, aes(x = year, y = value, colour = variable )) +
   scale_x_continuous(breaks = seq(1975, 2024, by = 5), limits = c(1972, 2026))
 ```
 This time series can be seperated into two larger periods. Pre 2000 where crime seems to follow unemployment, and post 2000 where crime seems less corralated to unemployment, apart from certain periods. Surprisingly, unemployment seems to be lagging behind crime in certain periods. 
-
 
 ## 3.4 Visualize spatial variation
 
@@ -297,7 +296,7 @@ ggplot(nl_crime) +
 <<<<<<< HEAD
 =======
 
-We can generally see the pattern that crime per capita follows unemployment. An anomaly is Groningen. Its crime unemployment is fairly high, yet crime per capita is low. Similarly, Utrecht's unemployment is low yet its crime per capita is somewhat higher. If population density is considered, than this pattern migh be better explained.Furthermore,  Other factors can also affect cause these anomalies, which shows that the connection is not as straighforward. Individual cities and munciplaties were not plotted, which impacts our abilitiy to draw conclusions. 
+We can generally see the pattern that crime per capita follows unemployment. An anomaly is Groningen. Its crime unemployment is fairly high, yet crime per capita is low. Similarly, Utrecht's unemployment is low yet its crime per capita is somewhat higher. If population density is considered, than this pattern migh be better explained. Furthermore,  Other factors can also affect cause these anomalies, which shows that the connection is not as straighforward. Individual cities and munciplaties were not plotted, which impacts our abilitiy to draw conclusions. 
 
 
 >>>>>>> d22ac6077aa71c465abe179b2f0ae4d7a514a3ae
@@ -307,14 +306,14 @@ We can generally see the pattern that crime per capita follows unemployment. An 
 ggplot(crime2021, aes(x = Age, y = Crime)) +
   geom_boxplot(fill = "yellow", color = "black") +
   labs(
-    title = "Boxplot of Crime Suspect Rate by Age Group",
+    title = "Boxplot of Crime Suspect Rate by Age Group in 2021",
     x = "Age category",
     y = "Crime Rate"
   ) 
 ggplot(unemployment_age, aes(x = Age, y = Unemployment)) +
   geom_boxplot(fill = "yellow", color = "black") +
   labs(
-    title = "Boxplot of Crime Suspect Rate by Age Group",
+    title = "Boxplot of Crime Suspect Rate by Age Group in 2021",
     x = "Age category",
     y = "unemployment"
   ) 
@@ -346,7 +345,7 @@ Both 1979 oil-crises and the 2008 recession see large spikes in unemployment, ye
 
 ## 4.1 Discuss your findings
 
-The clearly shows that unemployment and crime are correlated, but also implicates that there is not a direct causality between unemployment and crime. Unemployment is likely a catalyst for crime. That is, unemployment is related to various social factors which might directly impact potency to commit crimes. These results can be of interest for policy makers, as not only battling unemployment helps prevent crime, but setting up other social programs might reduce blowbacks of unemployment. Allocating funds towards vulnarable groups, such as youth,  and areas with a high population density will achieve the greatest results. 
+The results clearly shows that unemployment and crime are correlated, but also implicates that there is not a direct causality between unemployment and crime. Unemployment is likely a catalyst for crime. That is, unemployment is related to various social factors which might directly impact potency to commit crimes. These results can be of interest for policy makers, as not only battling unemployment helps prevent crime, but setting up other social programs might reduce blowbacks of unemployment. Allocating funds towards vulnarable groups, such as youth,  and areas with a high population density will achieve the greatest results. 
 
 # Part 5 - Reproducibility
 
@@ -378,5 +377,9 @@ Statline. (2025). Verdachten; geslacht, leeftijd, herkomst, opleiding, huishoude
 Statline. (2025). Arbeidsdeelname; kerncijfers, 2013-2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/85264NED/table?dl=BE1F8 
 
 Bezuinigen en hervormingen in de jaren ’80. (2022, June 21).  IsGeschiedenis. https://isgeschiedenis.nl/nieuws/bezuinigen-en-hervormingen-in-de-jaren-80
+
+Yeung, W. J., & Yang, Y. (2020). Labor Market Uncertainties for Youth and Young Adults: An International Perspective. The Annals Of The American Academy Of Political And Social Science, 688(1), 7–19. https://doi.org/10.1177/0002716220913487
+
+Kessler, J. B., Tahamont, S., Gelber, A., & Isen, A. (2022). The Effects of Youth Employment on Crime: Evidence from New York City Lotteries. Journal Of Policy Analysis And Management, 41(3), 710–730. https://doi.org/10.1002/pam.22393
 
 
