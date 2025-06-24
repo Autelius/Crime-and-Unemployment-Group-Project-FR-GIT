@@ -257,8 +257,7 @@ nl_prov <- st_read(
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE}
 #Reading the CSV  →  2023 only
-crime <- read_csv("data/working_data/merged_panel_data_final.csv",
-                  show_col_types = FALSE) |>
+crime <- merged_panel_data_final |>
   filter(year == 2023) |>
   mutate(
     province = sub(" \\(PV\\)$", "", province),        
