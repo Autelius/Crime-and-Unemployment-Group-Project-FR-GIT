@@ -27,7 +27,7 @@ require(sf)
 
 ## 1.1 Describe the Social Problem
 
-Our Social problem is to look at the relation between crime and unemployment, since these are often believed to be related with each other. Unemployment can cause financial stress and social exclusion, these factors can lead to criminal activity. Criminal records can also lower the chances of being accepted for a job, which makes criminal activity an easier option. Why this is a relevant issue, even though crime rates in the Netherlands have seen a steady decline. Financial and online crime are relatively growing (Nieuws Sociaal en Groen, 2023). Whilst youth unemployment remains a prominent issue in vulnerable communities. Understanding the relationship between unemployment and crime is highly important for the design of social and economic policies. A study by Verbruggen(2014), reviewed by Fischer(2015) shows a critical perspective on the relationship between crime and unemployment. It shows that employment is generally associated with lower crime rates, however it also shows that unemployment doesn’t necessarily lead to more crime. Whilst Verbruggen's study gives a good insight into the vulnerable Dutch population, broader analyses of this problem are still very limited. How structural shifts affect this relationship for example. Additionally, the understanding of spatial and subgroup variations in the Netherlands are also limited. We aim to contribute towards the limited understanding of the special and subgroup variations.
+Our Social problem is to look at the relation between crime and unemployment, since these are often believed to be related with each other. Unemployment can cause financial stress and social exclusion, these factors can lead to criminal activity. Criminal records can also lower the chances of being accepted for a job, which makes criminal activity an easier option. Why this is a relevant issue, even though crime rates in the Netherlands have seen a steady decline. Financial and online crime are relatively growing (Nieuws Sociaal en Groen, 2023). Whilst youth unemployment remains a prominent issue in vulnerable communities. Understanding the relationship between unemployment and crime is highly important for the design of social and economic policies. A study by Verbruggen(2014), reviewed by Fischer(2015) shows a critical perspective on the relationship between crime and unemployment. It shows that employment is generally associated with lower crime rates, however it also shows that unemployment doesn’t necessarily lead to more crime. Whilst Verbruggen (2014) gives a good insight into the vulnerable Dutch population, broader analyses of this problem are still very limited. How structural shifts affect this relationship for example. Additionally, the understanding of spatial and subgroup variations in the Netherlands are also limited. We aim to contribute towards the limited understanding of the special and subgroup variations.
 
 # Part 2 - Data Sourcing
 
@@ -320,6 +320,9 @@ ggplot(nl_crime) +
 <<<<<<< HEAD
 =======
 
+We can generally see the pattern that crime per capita follows unemployment. An anomaly is Groningen.Its crime unemployment is fairly high, yet crime per capita is low. Similarly, Utrecht's unemployment is low yet its crime per capita is somewhat higher. If population density is considered, than this pattern migh be better explained. 
+
+
 >>>>>>> d22ac6077aa71c465abe179b2f0ae4d7a514a3ae
 ## 3.5 Visualize sub-population variation
 
@@ -340,7 +343,7 @@ ggplot(unemployment_age, aes(x = Age, y = Unemployment)) +
   ) 
 ```
 
-In the boxplots above, it is clearly visible that unemployment and crime are linked. The Youth category is more vulnarable to unemployment than the adult category (Yeung & Yang, 2020), which in turn correlates with higher crime rates. Kessler et al. (2021) finds that reducing youth unemployment reduces youth crimes.
+In the boxplots above, it is clearly visible that unemployment and crime are linked. The Youth category is more vulnarable to unemployment than the adult category (Yeung & Yang, 2020), which in turn correlates with higher crime rates. Kessler et al. (2021) finds that reducing youth unemployment reduces youth crimes. Data limitation limit causality conclusions. Since the data does not distinguish if youth perpratrators were unemployed. Furthermore, youth might also be more prone to criminality regardless of employment status. 
 
 ## 3.6 Event analysis
 
@@ -376,7 +379,7 @@ These results can be of interest for policy makers, as not only battling unemplo
 
 ## 5.1 Github repository link
 
-Provide the link to your PUBLIC repository here: https://github.com/Autelius/Crime-and-Unemployment-Group-Project-FR-GIT.git
+Provide the link to your PUBLIC repository here: ...
 
 ## 5.2 Reference list
 
