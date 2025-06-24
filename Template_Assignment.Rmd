@@ -317,6 +317,10 @@ ggplot(nl_crime) +
   )
 ```
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d22ac6077aa71c465abe179b2f0ae4d7a514a3ae
 ## 3.5 Visualize sub-population variation
 
 ```{r visualise_subpopulations}
@@ -362,7 +366,7 @@ Both 1979 oil-crises and the 2008 recession see large spikes in unemployment, ye
 
 ## 4.1 Discuss your findings
 
-Under each plot certain trends and implactions where already discussed. By reviewing each plot as part of the whole, certain implacations and conclusions can be drawn.
+Under each plot certain trends and implacations where already discussed. By reviewing each plot as part of the whole, certain implacations and conclusions can be drawn.
 
 Unemployment is likely a catalyst for crime. I.E. unemployment is related to various social factors which might directly impact potency to commit crimes, such as..
 

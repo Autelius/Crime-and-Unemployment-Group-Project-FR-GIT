@@ -45,7 +45,13 @@ pivot_agg_data <- agg_merged %>%
 ggplot(pivot_agg_data, aes(x = year, y = value, colour = variable )) +
   geom_line() +
   labs(title = "aggragate crime and unemployment through time", x = "year", y = "variable") +
-  scale_x_continuous(breaks = seq(1975, 2024, by = 5), limits = c(1972, 2026))
+  scale_x_continuous(breaks = seq(1975, 2024, by = 5), limits = c(1972, 2026)) +
+  geom_vline(xintercept = c(1979, 2008), 
+             linetype = "solid", 
+             color = "black", 
+             size = 0.6) + 
+  annotate("text", x = 1974, y = 9, label = "1979\noil-crisis") +
+  annotate("text", x = 2017, y = 9, label = "2008\ngreat-recession")
 
 
 
