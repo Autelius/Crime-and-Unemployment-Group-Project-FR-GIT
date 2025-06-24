@@ -205,19 +205,20 @@ This time series can be seperated into two larger periods. Pre 2000 where crime 
 
 ## 3.4 Visualize spatial variation
 
-```{r, echo=TRUE, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 cbs_maps <- cbs_get_maps()
-# the layout of the data.frame is:
+
 str(cbs_maps)
-#read the GeoJSON straight from PDOK 
+
+#reading the GeoJSON straight from PDOK 
 nl_prov <- st_read(
   "https://cartomap.github.io/nl/wgs84/provincie_2014.geojson",
   quiet = TRUE
 )
 ```
 
-```{r, echo=TRUE, message=FALSE, warning=FALSE}
-#Reading the CSV  →  2023 only
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#Reading  →  2023 only
 crime <- merged_panel_data_final |>
   filter(year == 2023) |>
   mutate(
@@ -227,7 +228,7 @@ crime <- merged_panel_data_final |>
   filter(!province %in% "Nederland")
 ```
 
-```{r, echo=TRUE, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # Province shapes (CBS 2014)
 prov_shapes <- read_sf("https://cartomap.github.io/nl/wgs84/provincie_2014.geojson")
 # Join data → map
@@ -235,7 +236,7 @@ nl_crime <- prov_shapes |>
   left_join(crime, by = c("statnaam" = "province"))
 ```
 
-```{r, echo=TRUE, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(nl_crime) +
   geom_sf(aes(fill = crimes_per_capita), color = "white", size = 0.2) +
   scale_fill_gradient(
@@ -255,7 +256,7 @@ ggplot(nl_crime) +
   )
 ```
 
-```{r pop-heatmap, echo=TRUE, message=FALSE, warning=FALSE}
+```{r pop-heatmap, echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(nl_crime) +
   geom_sf(aes(fill = poplation_density), color = "white", size = 0.2) +
   scale_fill_gradient(
@@ -275,7 +276,7 @@ ggplot(nl_crime) +
   )
 ```
 
-```{r unemp-heatmap, echo=TRUE, message=FALSE, warning=FALSE}
+```{r unemp-heatmap, echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(nl_crime) +
   geom_sf(aes(fill = unemployment_rate), color = "white", size = 0.2) +
   scale_fill_gradient(
