@@ -58,11 +58,11 @@ unemployment_age <- read.csv("data/raw_data/unemployment_per_age.csv")
 
 ## 2.2 Provide a short summary of the dataset's
 
-The data sets are categorized within 3 categories: province level, aggregate and sub population. Since our topic is the relation between crime and unemployment in the Netherlands, these datasets are very suitable. The datasets do not only provide the crime and unemployment data for the Netherlands it self but also on a provincial level and age category, which allows for spatial variation and subpopulation analysis. The main variables used are unemployment rates - total unemployed working population/working population*100 - and amount of crimes registered per year. Since the data sets are classified as penal data sets, unemployment and crime can be compared each year. Population data sets are used to convert total crime to crime per capita, which allows for population control per province. CBS measures unemployment by surveying 20000 Dutch people of working age who actively seek employment, but are not employed. Population data each year is measured by Basis regristartie personen. And crime data orginates from data gathered by the Dutch police. 
+The data sets are categorized within 3 categories: province level, aggregate and sub population. Since our topic is the relation between crime and unemployment in the Netherlands, these datasets are very suitable. The datasets do not only provide the crime and unemployment data for the Netherlands it self but also on a provincial level and age category, which allows for spatial variation and subpopulation analysis. The main variables used are unemployment rates - total unemployed working population/working population*100 - and amount of crimes registered per year. Since the data sets are classified as panel data sets, unemployment and crime can be compared to each year. Population data sets are used to convert total crime to crime per capita, which allows for population control per province. CBS measures unemployment by surveying 20000 Dutch people of working age who actively seek employment, but are not employed. Population data each year is measured by Basis regristartie personen. And crime data originates from data gathered by the Dutch police. 
 
 ## 2.3 limitations
 
-For crime statistics, Only crimes that are registered are accounted for, however there are also crimes that have not been reported and thus not counted in this dataset. The data does not distinguish if perpratrators were unemployed. So conclusions drawn from this data can never be entirely valid. Additionally, people reported as unemployed might do undeclared work. 
+For crime statistics, only crimes that are registered are accounted for, there are also crimes that have not been reported and thus not counted in the datasets. Furthemore, the data does not distinguish if perpratrators were unemployed. So the validity of the conclusions draw from this data can never be fully verified. Additionally, people reported as unemployed might do undeclared work. 
 
 # Part 3 - Quantifying
 
@@ -202,7 +202,6 @@ ggplot(pivot_agg_data, aes(x = year, y = value, colour = variable )) +
 ```
 This time series can be seperated into two larger periods. Pre 2000 where crime seems to follow unemployment, and post 2000 where crime seems less corralated to unemployment, apart from certain periods. Surprisingly, unemployment seems to be lagging behind crime in certain periods. 
 
-
 ## 3.4 Visualize spatial variation
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE}
@@ -298,7 +297,7 @@ ggplot(nl_crime) +
 <<<<<<< HEAD
 =======
 
-We can generally see the pattern that crime per capita follows unemployment. An anomaly is Groningen. Its crime unemployment is fairly high, yet crime per capita is low. Similarly, Utrecht's unemployment is low yet its crime per capita is somewhat higher. If population density is considered, than this pattern migh be better explained.Furthermore,  Other factors can also affect cause these anomalies, which shows that the connection is not as straighforward. Individual cities and munciplaties were not plotted, which impacts our abilitiy to draw conclusions. 
+We can generally see the pattern that crime per capita follows unemployment. An anomaly is Groningen. Its crime unemployment is fairly high, yet crime per capita is low. Similarly, Utrecht's unemployment is low yet its crime per capita is somewhat higher. If population density is considered, than this pattern migh be better explained. Furthermore,  Other factors can also affect cause these anomalies, which shows that the connection is not as straighforward. Individual cities and munciplaties were not plotted, which impacts our abilitiy to draw conclusions. 
 
 
 >>>>>>> d22ac6077aa71c465abe179b2f0ae4d7a514a3ae
