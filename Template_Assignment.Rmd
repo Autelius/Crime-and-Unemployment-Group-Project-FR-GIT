@@ -308,14 +308,14 @@ We can generally see the pattern that crime per capita follows unemployment. An 
 ggplot(crime2021, aes(x = Age, y = Crime)) +
   geom_boxplot(fill = "yellow", color = "black") +
   labs(
-    title = "Boxplot of Crime Suspect Rate by Age Group",
+    title = "Boxplot of Crime Suspect Rate by Age Group in 2021",
     x = "Age category",
     y = "Crime Rate"
   ) 
 ggplot(unemployment_age, aes(x = Age, y = Unemployment)) +
   geom_boxplot(fill = "yellow", color = "black") +
   labs(
-    title = "Boxplot of Crime Suspect Rate by Age Group",
+    title = "Boxplot of Crime Suspect Rate by Age Group in 2021",
     x = "Age category",
     y = "unemployment"
   ) 
