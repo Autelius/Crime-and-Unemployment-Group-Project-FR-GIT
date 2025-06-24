@@ -40,7 +40,7 @@ Our Social problem is to look at the relation between crime and unemployment, si
 # province level
 DS_Panel_Unemployment <- read.csv("data/raw_data/unemployment_data_transform.csv")
 DS_Panel_Crime <- read.csv("data/raw_data/panel_data_crime.csv")
-DS_Population <- read.csv("data/raw_data/population_data.csv")
+DS_Population <- read.csv("data/population_data.csv")
 area_data_working <- read.csv("data/raw_data/area_data.csv")
 
 # aggragate

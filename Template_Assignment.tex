@@ -101,14 +101,15 @@
 \urlstyle{same}
 \hypersetup{
   pdftitle={The relationship between unemployment and crime in the Netherlands},
-  pdfauthor={Romeo Schoonderbeek, 2868407 Paul Claessens, 2859603 Furkan Kadir Öztürk, 2852640},
+  pdfauthor={Romeo Schoonderbeek, 2868407 Paul Claessens, 2859603 Furkan Kadir Öztürk, 2852640 Serena Kula 2856584 Bjorn Smit 2812968 Lia Seo 2841955},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{The relationship between unemployment and crime in the
 Netherlands}
 \author{Romeo Schoonderbeek, 2868407 Paul Claessens, 2859603 Furkan
-Kadir Öztürk, 2852640}
+Kadir Öztürk, 2852640 Serena Kula 2856584 Bjorn Smit 2812968 Lia Seo
+2841955}
 \date{2025-06-24}
 
 \begin{document}
@@ -130,7 +131,7 @@ Kadir Öztürk, 2852640}
 ## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
 ## v dplyr     1.1.4     v readr     2.1.5
 ## v forcats   1.0.0     v stringr   1.5.1
-## v ggplot2   3.5.2     v tibble    3.2.1
+## v ggplot2   3.5.2     v tibble    3.3.0
 ## v lubridate 1.9.4     v tidyr     1.3.1
 ## v purrr     1.0.4     
 ## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
@@ -157,15 +158,11 @@ Kadir Öztürk, 2852640}
 
 \begin{verbatim}
 ## Loading required package: sf
-## Linking to GEOS 3.13.1, GDAL 3.10.2, PROJ 9.5.1; sf_use_s2() is TRUE
+## Linking to GEOS 3.13.0, GDAL 3.5.3, PROJ 9.5.1; sf_use_s2() is TRUE
 \end{verbatim}
 
 \section{Part 1 - Identify a Social
 Problem}\label{part-1---identify-a-social-problem}
-
-Use APA referencing throughout your document.
-\href{https://www.mendeley.com/guides/apa-citation-guide/}{Here's a link
-to some explanation.}
 
 \subsection{1.1 Describe the Social
 Problem}\label{describe-the-social-problem}
@@ -175,28 +172,22 @@ unemployment, since these are often believed to be related with each
 other. Unemployment can cause financial stress and social exclusion,
 these factors can lead to criminal activity. Criminal records can also
 lower the chances of being accepted for a job, which makes criminal
-activity an easier option.
-
-Why this is a relevant issue, even though crime rates in the Netherlands
-have seen a steady decline. Financial and online crime are relatively
-growing (Nieuws Sociaal en Groen, 2023). Whilst youth unemployment
-remains a prominent issue in vulnerable communities. Understanding the
-relationship between unemployment and crime is highly important for the
-design of social and economic policies.
-
-A study by Verbruggen(2014), reviewed by Fischer(2015) shows a critical
-perspective on the relationship between crime and unemployment. It shows
-that employment is generally associated with lower crime rates, however
-it also shows that unemployment doesn't necessarily lead to more crime.
-
-Whilst Verbruggen's study gives a good insight into the vulnerable Dutch
-population, broader analyses of this problem are still very limited. How
-structural shifts affect this relationship for example. Additionally,
-the understanding of spatial and subgroup variations in the Netherlands
-are also limited.
-
-We aim to contribute towards the limited understanding of the special
-and subgroup variations.
+activity an easier option. Why this is a relevant issue, even though
+crime rates in the Netherlands have seen a steady decline. Financial and
+online crime are relatively growing (Nieuws Sociaal en Groen, 2023).
+Whilst youth unemployment remains a prominent issue in vulnerable
+communities. Understanding the relationship between unemployment and
+crime is highly important for the design of social and economic
+policies. A study by Verbruggen(2014), reviewed by Fischer(2015) shows a
+critical perspective on the relationship between crime and unemployment.
+It shows that employment is generally associated with lower crime rates,
+however it also shows that unemployment doesn't necessarily lead to more
+crime. Whilst Verbruggen (2014) gives a good insight into the vulnerable
+Dutch population, broader analyses of this problem are still very
+limited. How structural shifts affect this relationship for example.
+Additionally, the understanding of spatial and subgroup variations in
+the Netherlands are also limited. We aim to contribute towards the
+limited understanding of the special and subgroup variations.
 
 \section{Part 2 - Data Sourcing}\label{part-2---data-sourcing}
 
@@ -204,20 +195,18 @@ and subgroup variations.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# provincelevel}
+\CommentTok{\# province level}
 \NormalTok{DS\_Panel\_Unemployment }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"data/raw\_data/unemployment\_data\_transform.csv"}\NormalTok{)}
 \NormalTok{DS\_Panel\_Crime }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"data/raw\_data/panel\_data\_crime.csv"}\NormalTok{)}
-\NormalTok{DS\_Population }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"data/population\_data.csv"}\NormalTok{)}
+\NormalTok{DS\_Population }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"data/raw\_data/population\_data.csv"}\NormalTok{)}
 \NormalTok{area\_data\_working }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"data/raw\_data/area\_data.csv"}\NormalTok{)}
 
 \CommentTok{\# aggragate}
-
 \NormalTok{agg\_unemployment }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"data/raw\_data/aggragate\_total\_unemployment.csv"}\NormalTok{)}
 \NormalTok{agg\_crime }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"data/raw\_data/aggragate\_total\_crime.csv"}\NormalTok{)}
 \NormalTok{agg\_population }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"data/raw\_data/population\_data\_raw.csv"}\NormalTok{)}
 
 \CommentTok{\# subpopulation}
-
 \NormalTok{criminaliteit\_per\_leeftijd }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"data/raw\_data/criminaliteit\_per\_leeftijd.csv"}\NormalTok{) }
 
 \NormalTok{unemployment\_age }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"data/raw\_data/unemployment\_per\_age.csv"}\NormalTok{) }
@@ -225,55 +214,33 @@ and subgroup variations.
 \end{Shaded}
 
 \subsection{2.2 Provide a short summary of the
-dataset(s)}\label{provide-a-short-summary-of-the-datasets}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-
-\end{Highlighting}
-\end{Shaded}
+dataset's}\label{provide-a-short-summary-of-the-datasets}
 
 The data sets are categorized within 3 categories: province level,
-aggregate and sub population.
+aggregate and sub population. Since our topic is the relation between
+crime and unemployment in the Netherlands, these datasets are very
+suitable. The datasets do not only provide the crime and unemployment
+data for the Netherlands it self but also on a provincial level and age
+category, which allows for spatial variation and subpopulation analysis.
+The main variables used are unemployment rates - total unemployed
+working population/working population*100 - and amount of crimes
+registered per year. Since the data sets are classified as panel data
+sets, unemployment and crime can be compared to each year. Population
+data sets are used to convert total crime to crime per capita, which
+allows for population control per province. CBS measures unemployment by
+surveying 20000 Dutch people of working age who actively seek
+employment, but are not employed. Population data each year is measured
+by Basis regristartie personen. And crime data originates from data
+gathered by the Dutch police.
 
-Province level: Includes 4 data sets. Two are self explanatory.
-Population data gives the population per year per province. Area data
-gives the area per province (per year). Our main data sets are the
-employment and crime data sets. DS\_panel\_Unemployment is raw panel
-data extracted from CBS. For every year and province the unemployment
-unemployment rate - (non-employed working population/working
-population)*100 -, is given. Similarly, DS\_Panel\_Crime gives the total
-amount of reported crimes per year per province. All reported crimes are
-considered, such as violent, financial and petty crimes. After data
-cleaning, these provincial panel data sets will be useful to visualize
-spatial variation.
+\subsection{2.3 limitations}\label{limitations}
 
-Aggregate level: These raw data sets focus on the aggregate level of
-crime and unemployment in the Netherlands. For agg\_unemployment the
-aggregate unemployment rate per year in the Netherlands is given. For
-agg\_crime the same is done, but then with total reported crimes. Each
-years population is included in the agg\_population data set. After data
-cleaning, these aggregate data sets will be useful to visualize temporal
-variation, and the aggregate connection between crime and unemployment.
-
-Subpopulation: Similair to previous data sets, the subpopulation data
-sets provide information of crime and unemployment per age group.
-
-\subsection{2.3 Describe the type of variables
-included}\label{describe-the-type-of-variables-included}
-
-Think of things like:
-
-\begin{itemize}
-\item
-  Do the variables contain health information or SES information?
-\item
-  Have they been measured by interviewing individuals or is the data
-  coming from administrative sources?
-\end{itemize}
-
-\emph{For the sake of this example, I will continue with the
-assignment\ldots{}}
+For crime statistics, only crimes that are registered are accounted for,
+there are also crimes that have not been reported and thus not counted
+in the datasets. Furthemore, the data does not distinguish if
+perpratrators were unemployed. So the validity of the conclusions draw
+from this data can never be fully verified. Additionally, people
+reported as unemployed might do undeclared work.
 
 \section{Part 3 - Quantifying}\label{part-3---quantifying}
 
@@ -282,7 +249,10 @@ assignment\ldots{}}
 CBS datasets already come in panel data form. Data cleaning will include
 removing unnecessary rows and columns, adjusting data frames and merging
 data sets. 3 main data sets are used. Province panel data, aggregate
-panel data and data sets used for sub population analysis.
+panel data and data sets used for sub population analysis.Futhermore,
+certain entries within data sets have to be converted to numerics.
+Finally column names are given to make the data sets more structured and
+formal.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -335,9 +305,11 @@ panel data and data sets used for sub population analysis.
 \NormalTok{merged\_panel\_data\_final }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(merged\_data, area\_data\_working[, }\DecValTok{3}\NormalTok{])}
 
 \FunctionTok{colnames}\NormalTok{(merged\_panel\_data\_final) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"year"}\NormalTok{, }\StringTok{"province"}\NormalTok{, }\StringTok{"unemployment\_rate"}\NormalTok{, }\StringTok{"total\_crimes"}\NormalTok{, }\StringTok{"population"}\NormalTok{, }\StringTok{"crimes\_per\_capita"}\NormalTok{, }\StringTok{"area\_km2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
-\NormalTok{merged\_panel\_data\_final }\OtherTok{\textless{}{-}} \FunctionTok{mutate}\NormalTok{(merged\_panel\_data\_final, }\AttributeTok{poplation\_density =}\NormalTok{ population}\SpecialCharTok{/}\NormalTok{area\_km2)}
-
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{\# aggregate data cleaning}
 
 \NormalTok{agg\_unemployment }\OtherTok{\textless{}{-}}\NormalTok{ agg\_unemployment[}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{51}\NormalTok{,}\DecValTok{52}\NormalTok{) ,]}
@@ -378,24 +350,11 @@ panel data and data sets used for sub population analysis.
 \NormalTok{agg\_merged }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(agg\_merged, agg\_population[, }\DecValTok{2}\NormalTok{])}
 
 \FunctionTok{colnames}\NormalTok{(agg\_merged) }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"year"}\NormalTok{, }\StringTok{"unemployment"}\NormalTok{, }\StringTok{"total\_crime"}\NormalTok{, }\StringTok{"population"}\NormalTok{)}
-
-\FunctionTok{str}\NormalTok{(agg\_merged)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## 'data.frame':    50 obs. of  4 variables:
-##  $ year        : num  1975 1976 1977 1978 1979 ...
-##  $ unemployment: num  3.5 4.2 4.3 4.2 4.1 4.3 5.7 8 9.6 9.6 ...
-##  $ total_crime : num  486670 564025 590880 612370 668235 ...
-##  $ population  : int  13600000 13730000 13810000 13900000 13990000 14090000 14210000 14290000 14340000 14400000 ...
-\end{verbatim}
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{agg\_merged }\OtherTok{\textless{}{-}}\NormalTok{ agg\_merged }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{crime\_per\_capita =}\NormalTok{ (total\_crime}\SpecialCharTok{/}\NormalTok{population)}\SpecialCharTok{*}\DecValTok{100}\NormalTok{)}
-
 \CommentTok{\# subpopulation}
 
 \NormalTok{crime2021 }\OtherTok{\textless{}{-}}\NormalTok{ criminaliteit\_per\_leeftijd }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(Perioden }\SpecialCharTok{==} \StringTok{"2021"}\NormalTok{)}
@@ -422,16 +381,21 @@ panel data and data sets used for sub population analysis.
 \end{Highlighting}
 \end{Shaded}
 
-Please use a separate `R block' of code for each type of cleaning. So,
-e.g.~one for missing values, a new one for removing unnecessary
-variables etc.
-
 \subsection{3.2 Generate necessary
 variables}\label{generate-necessary-variables}
 
-Variable 1
+Variable 1 and 2 (Crimes per capita and population density)
 
-Variable 2
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{agg\_merged }\OtherTok{\textless{}{-}}\NormalTok{ agg\_merged }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{crime\_per\_capita =}\NormalTok{ (total\_crime}\SpecialCharTok{/}\NormalTok{population)}\SpecialCharTok{*}\DecValTok{100}\NormalTok{)}
+
+\NormalTok{merged\_panel\_data\_final }\OtherTok{\textless{}{-}} \FunctionTok{mutate}\NormalTok{(merged\_panel\_data\_final, }\AttributeTok{poplation\_density =}\NormalTok{ population}\SpecialCharTok{/}\NormalTok{area\_km2)}
+\end{Highlighting}
+\end{Shaded}
+
+Variable 3 Age categories
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -458,18 +422,15 @@ variation}\label{visualize-temporal-variation}
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{Template_Assignment_files/figure-latex/unnamed-chunk-3-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{Template_Assignment_files/figure-latex/unnamed-chunk-4-1.pdf}}
+This time series can be seperated into two larger periods. Pre 2000
+where crime seems to follow unemployment, and post 2000 where crime
+seems less corralated to unemployment, apart from certain periods.
+Surprisingly, unemployment seems to be lagging behind crime in certain
+periods.
 
 \subsection{3.4 Visualize spatial
 variation}\label{visualize-spatial-variation}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{cbs\_maps }\OtherTok{\textless{}{-}} \FunctionTok{cbs\_get\_maps}\NormalTok{()}
-\CommentTok{\# the layout of the data.frame is:}
-\FunctionTok{str}\NormalTok{(cbs\_maps)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## 'data.frame':    620 obs. of  4 variables:
@@ -479,125 +440,48 @@ variation}\label{visualize-spatial-variation}
 ##  $ rd    : chr  "https://cartomap.github.io/nl/rd/arbeidsmarktregio_2014.geojson" "https://cartomap.github.io/nl/rd/arbeidsmarktregio_2015.geojson" "https://cartomap.github.io/nl/rd/arbeidsmarktregio_2016.geojson" "https://cartomap.github.io/nl/rd/arbeidsmarktregio_2017.geojson" ...
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\#read the GeoJSON straight from PDOK }
-\NormalTok{nl\_prov }\OtherTok{\textless{}{-}} \FunctionTok{st\_read}\NormalTok{(}
-  \StringTok{"https://cartomap.github.io/nl/wgs84/provincie\_2014.geojson"}\NormalTok{,}
-  \AttributeTok{quiet =} \ConstantTok{TRUE}
-\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\#Reading the CSV  →  2023 only}
-\NormalTok{crime }\OtherTok{\textless{}{-}}\NormalTok{ merged\_panel\_data\_final }\SpecialCharTok{|\textgreater{}}
-  \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2023}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
-  \FunctionTok{mutate}\NormalTok{(}
-    \AttributeTok{province =} \FunctionTok{sub}\NormalTok{(}\StringTok{" }\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{(PV}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{)$"}\NormalTok{, }\StringTok{""}\NormalTok{, province),        }
-    \AttributeTok{province =} \FunctionTok{recode}\NormalTok{(province, }\StringTok{"Fryslân"} \OtherTok{=} \StringTok{"Friesland"}\NormalTok{)}
-\NormalTok{  ) }\SpecialCharTok{|\textgreater{}}
-  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\NormalTok{province }\SpecialCharTok{\%in\%} \StringTok{"Nederland"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Province shapes (CBS 2014)}
-\NormalTok{prov\_shapes }\OtherTok{\textless{}{-}} \FunctionTok{read\_sf}\NormalTok{(}\StringTok{"https://cartomap.github.io/nl/wgs84/provincie\_2014.geojson"}\NormalTok{)}
-\CommentTok{\# Join data → map}
-\NormalTok{nl\_crime }\OtherTok{\textless{}{-}}\NormalTok{ prov\_shapes }\SpecialCharTok{|\textgreater{}}
-  \FunctionTok{left\_join}\NormalTok{(crime, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"statnaam"} \OtherTok{=} \StringTok{"province"}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(nl\_crime) }\SpecialCharTok{+}
-  \FunctionTok{geom\_sf}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ crimes\_per\_capita), }\AttributeTok{color =} \StringTok{"white"}\NormalTok{, }\AttributeTok{size =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{scale\_fill\_gradient}\NormalTok{(}
-    \AttributeTok{low  =} \StringTok{"\#fee5d9"}\NormalTok{,  }\CommentTok{\# pale red}
-    \AttributeTok{high =} \StringTok{"\#a50f15"}\NormalTok{,  }\CommentTok{\# dark red}
-    \AttributeTok{na.value =} \StringTok{"grey90"}\NormalTok{,}
-    \AttributeTok{name =} \StringTok{"Crime}\SpecialCharTok{\textbackslash{}n}\StringTok{per capita"}
-\NormalTok{  ) }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}
-    \AttributeTok{title =} \StringTok{"Crime per capita by Dutch province – 2023"}
-\NormalTok{  ) }\SpecialCharTok{+}
-  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{theme}\NormalTok{(}
-    \AttributeTok{panel.grid =} \FunctionTok{element\_blank}\NormalTok{(),}
-    \AttributeTok{axis.text  =} \FunctionTok{element\_blank}\NormalTok{(),}
-    \AttributeTok{axis.ticks =} \FunctionTok{element\_blank}\NormalTok{()}
-\NormalTok{  )}
-\end{Highlighting}
-\end{Shaded}
-
-\pandocbounded{\includegraphics[keepaspectratio]{Template_Assignment_files/figure-latex/unnamed-chunk-7-1.pdf}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(nl\_crime) }\SpecialCharTok{+}
-  \FunctionTok{geom\_sf}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ poplation\_density), }\AttributeTok{color =} \StringTok{"white"}\NormalTok{, }\AttributeTok{size =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{scale\_fill\_gradient}\NormalTok{(}
-    \AttributeTok{low  =} \StringTok{"\#deebf7"}\NormalTok{,  }\CommentTok{\# pale blue}
-    \AttributeTok{high =} \StringTok{"\#08306b"}\NormalTok{,  }\CommentTok{\# dark blue}
-    \AttributeTok{na.value =} \StringTok{"grey90"}\NormalTok{,}
-    \AttributeTok{name =} \StringTok{"Population}\SpecialCharTok{\textbackslash{}n}\StringTok{density"}
-\NormalTok{  ) }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}
-    \AttributeTok{title =} \StringTok{"Population density by Dutch province – 2023"}
-\NormalTok{  ) }\SpecialCharTok{+}
-  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{theme}\NormalTok{(}
-    \AttributeTok{panel.grid =} \FunctionTok{element\_blank}\NormalTok{(),}
-    \AttributeTok{axis.text  =} \FunctionTok{element\_blank}\NormalTok{(),}
-    \AttributeTok{axis.ticks =} \FunctionTok{element\_blank}\NormalTok{()}
-\NormalTok{  )}
-\end{Highlighting}
-\end{Shaded}
+\pandocbounded{\includegraphics[keepaspectratio]{Template_Assignment_files/figure-latex/unnamed-chunk-8-1.pdf}}
 
 \pandocbounded{\includegraphics[keepaspectratio]{Template_Assignment_files/figure-latex/pop-heatmap-1.pdf}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(nl\_crime) }\SpecialCharTok{+}
-  \FunctionTok{geom\_sf}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ unemployment\_rate), }\AttributeTok{color =} \StringTok{"white"}\NormalTok{, }\AttributeTok{size =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{scale\_fill\_gradient}\NormalTok{(}
-    \AttributeTok{low  =} \StringTok{"\#e5f5e0"}\NormalTok{,  }\CommentTok{\# pale green}
-    \AttributeTok{high =} \StringTok{"\#00441b"}\NormalTok{,  }\CommentTok{\# dark green}
-    \AttributeTok{na.value =} \StringTok{"grey90"}\NormalTok{,}
-    \AttributeTok{name =} \StringTok{"Unemployment}\SpecialCharTok{\textbackslash{}n}\StringTok{rate"}
-\NormalTok{  ) }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}
-    \AttributeTok{title =} \StringTok{"Unemployment rate by Dutch province – 2023"}
-\NormalTok{  ) }\SpecialCharTok{+}
-  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{theme}\NormalTok{(}
-    \AttributeTok{panel.grid =} \FunctionTok{element\_blank}\NormalTok{(),}
-    \AttributeTok{axis.text  =} \FunctionTok{element\_blank}\NormalTok{(),}
-    \AttributeTok{axis.ticks =} \FunctionTok{element\_blank}\NormalTok{()}
-\NormalTok{  )}
-\end{Highlighting}
-\end{Shaded}
-
 \pandocbounded{\includegraphics[keepaspectratio]{Template_Assignment_files/figure-latex/unemp-heatmap-1.pdf}}
 
-Here you provide a description of why the plot above is relevant to your
-specific social problem.
+\section{\textless\textless\textless\textless\textless\textless\textless{}
+HEAD}\label{head}
 
-\subsection{3.5 Visualize sub-population
-variation}\label{visualize-sub-population-variation}
+We can generally see the pattern that crime per capita follows
+unemployment. An anomaly is Groningen. Its unemployment is high, yet
+crime per capita is failry low. Similarly, Flevoland's unemployment is
+fairly yet its crime per capita is somewhat lower. If population density
+is considered, than this pattern migh be better explained. Furthermore,
+Other factors can also affect cause these anomalies, which shows that
+the connection is not as straighforward. Individual cities and
+munciplaties were not plotted, which impacts our abilitiy to draw
+conclusions.
 
-What is the poverty rate by state?
+\begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+d22ac6077aa71c465abe179b2f0ae4d7a514a3ae \#\# 3.5 Visualize
+sub-population variation
+\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(crime2021, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Age, }\AttributeTok{y =}\NormalTok{ Crime)) }\SpecialCharTok{+}
   \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill =} \StringTok{"yellow"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}
-    \AttributeTok{title =} \StringTok{"Boxplot of Crime Suspect Rate by Age Group"}\NormalTok{,}
+    \AttributeTok{title =} \StringTok{"Boxplot of Crime Suspect Rate by Age Group in 2021"}\NormalTok{,}
     \AttributeTok{x =} \StringTok{"Age category"}\NormalTok{,}
     \AttributeTok{y =} \StringTok{"Crime Rate"}
 \NormalTok{  ) }
@@ -611,7 +495,7 @@ What is the poverty rate by state?
 \FunctionTok{ggplot}\NormalTok{(unemployment\_age, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Age, }\AttributeTok{y =}\NormalTok{ Unemployment)) }\SpecialCharTok{+}
   \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill =} \StringTok{"yellow"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}
-    \AttributeTok{title =} \StringTok{"Boxplot of Crime Suspect Rate by Age Group"}\NormalTok{,}
+    \AttributeTok{title =} \StringTok{"Boxplot of Crime Suspect Rate by Age Group in 2021"}\NormalTok{,}
     \AttributeTok{x =} \StringTok{"Age category"}\NormalTok{,}
     \AttributeTok{y =} \StringTok{"unemployment"}
 \NormalTok{  ) }
@@ -620,12 +504,16 @@ What is the poverty rate by state?
 
 \pandocbounded{\includegraphics[keepaspectratio]{Template_Assignment_files/figure-latex/visualise_subpopulations-2.pdf}}
 
-Here you provide a description of why the plot above is relevant to your
-specific social problem.
+In the boxplots above, it is clearly visible that unemployment and crime
+are linked. The Youth category is more vulnarable to unemployment than
+the adult category (Yeung \& Yang, 2020), which in turn correlates with
+higher crime rates. Kessler et al.~(2021) finds that reducing youth
+unemployment reduces youth crimes. Data limitation limit causality
+conclusions. Since the data does not distinguish if youth perpratrators
+were unemployed. Furthermore, youth might also be more prone to
+criminality regardless of employment status.
 
 \subsection{3.6 Event analysis}\label{event-analysis}
-
-Analyze the relationship between two variables.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -639,36 +527,17 @@ Analyze the relationship between two variables.
   \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =} \FunctionTok{c}\NormalTok{(}\DecValTok{1979}\NormalTok{, }\DecValTok{2008}\NormalTok{), }
              \AttributeTok{linetype =} \StringTok{"solid"}\NormalTok{, }
              \AttributeTok{color =} \StringTok{"black"}\NormalTok{, }
-             \AttributeTok{size =} \FloatTok{0.6}\NormalTok{) }\SpecialCharTok{+} 
+             \AttributeTok{linewidth =} \FloatTok{0.6}\NormalTok{) }\SpecialCharTok{+} 
   \FunctionTok{annotate}\NormalTok{(}\StringTok{"text"}\NormalTok{, }\AttributeTok{x =} \DecValTok{1974}\NormalTok{, }\AttributeTok{y =} \DecValTok{9}\NormalTok{, }\AttributeTok{label =} \StringTok{"1979}\SpecialCharTok{\textbackslash{}n}\StringTok{oil{-}crisis"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{annotate}\NormalTok{(}\StringTok{"text"}\NormalTok{, }\AttributeTok{x =} \DecValTok{2017}\NormalTok{, }\AttributeTok{y =} \DecValTok{9}\NormalTok{, }\AttributeTok{label =} \StringTok{"2008}\SpecialCharTok{\textbackslash{}n}\StringTok{great{-}recession"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-## i Please use `linewidth` instead.
-## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-## generated.
-\end{verbatim}
-
 \pandocbounded{\includegraphics[keepaspectratio]{Template_Assignment_files/figure-latex/analysis-1.pdf}}
 
-After the Oil-crisis in 1979, The Netherlands would experience
-significant unemployment and crime per capita. According to
-Ingeschiedenis.nl this was due to The Netherlands having a high budget
-deficit and to little government intervention in accordance with the
-Keynesian economic view of the time period (Bezuinigen En Hervormingen
-in De Jaren '80, 2022). After the 2008 financial crisis The Netherlands
-would find itself in a similar position with unemployment rising,
-however crime per capita would fall in the next 5 years to historic
-lows. What explains this phenomenon? An explanation by Ingschiedenis.nl
-is that while the Netherlands decided after 1985 to reduce wages and the
-budget deficit, The Netherlands in 2008 decided to increase spending,
-this decision would be later reversed in the 2010's to a policy of
-fiscal conservatism (Bezuinigen En Hervormingen in De Jaren '80, 2022).
-A possible explanation for the movement of crime per capita in
+Both 1979 oil-crises and the 2008 recession see large spikes in
+unemployment, yet only 1979 sees an increase in crimp per capita as
+well. A possible explanation for the movement of crime per capita in
 accordance with unemployment in 1980 to an inverse movement in 2008
 could be the fact that the population is much younger in 1980 compared
 to 2008 and thus more people are in their peak-crime committing age
@@ -676,20 +545,89 @@ to 2008 and thus more people are in their peak-crime committing age
 explanation is that the welfare safety net was much more robust in 2008
 than in the 1980's which means that people who were unemployed where
 less inclined to do crime (Bezuinigen En Hervormingen in De Jaren '80,
-2022).
+2022). This shows that while unemployment may be linked in some cases,
+other factors play a significant role as well. Furthermore, trends in
+crime per capita predates trends in unemployment during both events,
+which negatively impacts the validity of our conclusions.
 
 \section{Part 4 - Discussion}\label{part-4---discussion}
 
 \subsection{4.1 Discuss your findings}\label{discuss-your-findings}
 
+The results clearly shows that unemployment and crime are correlated,
+but also implicates that there is not a direct causality between
+unemployment and crime. Unemployment is likely a catalyst for crime.
+That is, unemployment is related to various social factors which might
+directly impact potency to commit crimes. These results can be of
+interest for policy makers, as not only battling unemployment helps
+prevent crime, but setting up other social programs might reduce
+blowbacks of unemployment. Allocating funds towards vulnarable groups,
+such as youth, and areas with a high population density will achieve the
+greatest results.
+
 \section{Part 5 - Reproducibility}\label{part-5---reproducibility}
 
 \subsection{5.1 Github repository link}\label{github-repository-link}
 
-Provide the link to your PUBLIC repository here: \ldots{}
+Provide the link to your PUBLIC repository
+here:\url{https://github.com/Autelius/Crime-and-Unemployment-Group-Project-FR-GIT.git}
 
 \subsection{5.2 Reference list}\label{reference-list}
 
-Use APA referencing throughout your document.
+Fischer, T. (2015). De relatie tussen werk en criminaliteit uitgeplozen.
+Tijdschrift voor Criminologie, 57(3), 334--338.
+\url{https://www.boomportaal.nl/tijdschrift/TvC/TvC_0165-182X_2015_057_003_008}
+
+Nieuws Sociaal en Groen. (2023). Criminaliteit: de stand van zaken in
+Nederland. Retrieved from
+\url{https://nieuwsociaalengroen.nl/criminaliteit/}
+
+Verbruggen, J. (2014). Previously institutionalized youths on the road
+to adulthood: A longitudinal study on employment and crime.
+{[}PhD-Thesis - Research and graduation internal, Vrije Universiteit
+Amsterdam{]}.
+
+Statline. (2025). Arbeidsdeelname; provincie, 2013--2024 {[}Data set{]}.
+Centraal Bureau voor de Statistiek.
+\url{https://opendata.cbs.nl/\#/CBS/nl/dataset/85268NED/table?dl=BE1FB}
+
+Cbs. (2025). Geregistreerde criminaliteit; soort misdrijf, regio,
+2010-2024 {[}Data set{]}. Centraal Bureau voor de Statistiek.
+\url{https://opendata.cbs.nl/\#/CBS/nl/dataset/85268NED/table?dl=BE1FB}
+
+Statline. (2025). Bevolkingsontwikkeling; regio per maand, 2002-2024
+{[}Data set{]}. Centraal Bureau voor de Statistiek.
+\url{https://opendata.cbs.nl/\#/CBS/nl/dataset/37230ned/table}
+
+Statline. (2006). Volkstelling; oppervlakten, 1930 {[}Data set{]}.
+Centraal Bureau voor de Statistiek.
+\url{https://opendata.cbs.nl/\#/CBS/nl/dataset/71118NED/table}
+
+Statline. (2025). Geregistreerde criminaliteit, 1948-2024 {[}Data
+set{]}. Centraal Bureau voor de Statistiek.
+\url{https://opendata.cbs.nl/\#/CBS/nl/dataset/83723NED/table}
+
+Statline. (2025). Verdachten; geslacht, leeftijd, herkomst, opleiding,
+huishoudensinkomen, 2010-2024 {[}Data set{]}. Centraal Bureau voor de
+Statistiek.
+\url{https://opendata.cbs.nl/\#/CBS/nl/dataset/85658NED/table}
+
+Statline. (2025). Arbeidsdeelname; kerncijfers, 2013-2024 {[}Data
+set{]}. Centraal Bureau voor de Statistiek.
+\url{https://opendata.cbs.nl/\#/CBS/nl/dataset/85264NED/table?dl=BE1F8}
+
+Bezuinigen en hervormingen in de jaren '80. (2022, June 21).
+IsGeschiedenis.
+\url{https://isgeschiedenis.nl/nieuws/bezuinigen-en-hervormingen-in-de-jaren-80}
+
+Yeung, W. J., \& Yang, Y. (2020). Labor Market Uncertainties for Youth
+and Young Adults: An International Perspective. The Annals Of The
+American Academy Of Political And Social Science, 688(1), 7--19.
+\url{https://doi.org/10.1177/0002716220913487}
+
+Kessler, J. B., Tahamont, S., Gelber, A., \& Isen, A. (2022). The
+Effects of Youth Employment on Crime: Evidence from New York City
+Lotteries. Journal Of Policy Analysis And Management, 41(3), 710--730.
+\url{https://doi.org/10.1002/pam.22393}
 
 \end{document}
