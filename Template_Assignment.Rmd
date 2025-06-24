@@ -2,6 +2,7 @@
 title: The relationship between unemployment and crime in the Netherlands
 author: Romeo Schoonderbeek, 2868407
         Paul Claessens, 2859603
+        Furkan Kadir Öztürk, 2852640 
 Lecturer : Jack Flitzgerald, Chantal Schouwenaar
         
 date: "`r Sys.Date()`"
@@ -60,7 +61,7 @@ unemployment_age <- read.csv("data/raw_data/unemployment_per_age.csv")
 ## 2.2 Provide a short summary of the dataset(s)
 
 ```{r}
-head(dataset)
+
 ```
 
 In this case we see 28 variables, but we miss some information on what units they are in. We also don't know anything about the year/moment in which this data has been captured.
@@ -85,7 +86,7 @@ Think of things like:
 
 ## 3.1 Data cleaning
 
-CBS datasets already come in panel data form. Data cleaning will include removing unncessary rows and columns, adjusting data frames and merging data sets. 3 main data sets are used. Province panel data, aggregate panel data and data sets used for sub population analysis.
+CBS datasets already come in panel data form. Data cleaning will include removing unnecessary rows and columns, adjusting data frames and merging data sets. 3 main data sets are used. Province panel data, aggregate panel data and data sets used for sub population analysis.
 
 ```{r}
 # province panel data cleaning
