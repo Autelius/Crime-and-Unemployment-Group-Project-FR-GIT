@@ -35,12 +35,11 @@ Include the following:
 ## 2.1 Load in the data
 
 ```{r loading_data}
-DS_Panel_Unemployment <- read.csv("data/working_data/unemployment_data_transform.csv")
-DS_Panel_Crime <- read.csv("data/working_data/panel_data_crime.csv")
+# provincelevel
+DS_Panel_Unemployment <- read.csv("data/raw_data/unemployment_data_transform.csv")
+DS_Panel_Crime <- read.csv("data/raw_data/panel_data_crime.csv")
 DS_Population <- read.csv("data/population_data.csv")
 area_data_working <- read.csv("data/raw_data/area_data.csv")
-
-###### not raw data, isert raw data from cvs (possible that some additional cleaning should be done)
 
 # aggragate
 
@@ -53,6 +52,7 @@ agg_population <- read.csv("data/raw_data/population_data_raw.csv")
 criminaliteit_per_leeftijd <- read.csv("data/raw_data/criminaliteit_per_leeftijd.csv") 
 
 unemployment_age <- read.csv("data/raw_data/unemployment_per_age.csv") 
+
 
 
 ```
