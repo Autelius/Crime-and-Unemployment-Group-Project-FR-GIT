@@ -16,7 +16,6 @@ nl_prov <- st_read(
 )
 
 
-
 # Reading the CSV  (2023) 
 crime <- read_csv("data/working_data/merged_panel_data_final.csv",
                   show_col_types = FALSE) |>
