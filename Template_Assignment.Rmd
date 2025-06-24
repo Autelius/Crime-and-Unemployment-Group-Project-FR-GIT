@@ -25,19 +25,9 @@ require(sf)
 
 # Part 1 - Identify a Social Problem
 
-Use APA referencing throughout your document. [Here's a link to some explanation.](https://www.mendeley.com/guides/apa-citation-guide/)
-
 ## 1.1 Describe the Social Problem
 
-Our Social problem is to look at the relation between crime and unemployment, since these are often believed to be related with each other. Unemployment can cause financial stress and social exclusion, these factors can lead to criminal activity. Criminal records can also lower the chances of being accepted for a job, which makes criminal activity an easier option.
-
-Why this is a relevant issue, even though crime rates in the Netherlands have seen a steady decline. Financial and online crime are relatively growing (Nieuws Sociaal en Groen, 2023). Whilst youth unemployment remains a prominent issue in vulnerable communities. Understanding the relationship between unemployment and crime is highly important for the design of social and economic policies.
-
-A study by Verbruggen(2014), reviewed by Fischer(2015) shows a critical perspective on the relationship between crime and unemployment. It shows that employment is generally associated with lower crime rates, however it also shows that unemployment doesn’t necessarily lead to more crime.
-
-Whilst Verbruggen's study gives a good insight into the vulnerable Dutch population, broader analyses of this problem are still very limited. How structural shifts affect this relationship for example. Additionally, the understanding of spatial and subgroup variations in the Netherlands are also limited.
-
-We aim to contribute towards the limited understanding of the special and subgroup variations.
+Our Social problem is to look at the relation between crime and unemployment, since these are often believed to be related with each other. Unemployment can cause financial stress and social exclusion, these factors can lead to criminal activity. Criminal records can also lower the chances of being accepted for a job, which makes criminal activity an easier option. Why this is a relevant issue, even though crime rates in the Netherlands have seen a steady decline. Financial and online crime are relatively growing (Nieuws Sociaal en Groen, 2023). Whilst youth unemployment remains a prominent issue in vulnerable communities. Understanding the relationship between unemployment and crime is highly important for the design of social and economic policies. A study by Verbruggen(2014), reviewed by Fischer(2015) shows a critical perspective on the relationship between crime and unemployment. It shows that employment is generally associated with lower crime rates, however it also shows that unemployment doesn’t necessarily lead to more crime. Whilst Verbruggen's study gives a good insight into the vulnerable Dutch population, broader analyses of this problem are still very limited. How structural shifts affect this relationship for example. Additionally, the understanding of spatial and subgroup variations in the Netherlands are also limited. We aim to contribute towards the limited understanding of the special and subgroup variations.
 
 # Part 2 - Data Sourcing
 
@@ -61,19 +51,9 @@ agg_population <- read.csv("data/raw_data/population_data_raw.csv")
 criminaliteit_per_leeftijd <- read.csv("data/raw_data/criminaliteit_per_leeftijd.csv") 
 
 unemployment_age <- read.csv("data/raw_data/unemployment_per_age.csv") 
-
-
-
 ```
 
-## 2.2 Provide a short summary of the dataset(s)
-
-```{r}
-
-```
-
-``` r
-```
+## 2.2 Provide a short summary of the dataset's
 
 The data sets are categorized within 3 categories: province level, aggregate and sub population.
 
@@ -215,6 +195,8 @@ Variable 1
 
 ```{r gen_var1}
 
+
+
 ```
 
 Variable 2
@@ -336,8 +318,6 @@ Here you provide a description of why the plot above is relevant to your specifi
 
 ## 3.5 Visualize sub-population variation
 
-What is the poverty rate by state?
-
 ```{r visualise_subpopulations}
 ggplot(crime2021, aes(x = Age, y = Crime)) +
   geom_boxplot(fill = "yellow", color = "black") +
@@ -355,11 +335,9 @@ ggplot(unemployment_age, aes(x = Age, y = Unemployment)) +
   ) 
 ```
 
-Here you provide a description of why the plot above is relevant to your specific social problem.
+In the boxplots above, it is clearly visible that unemployment and crime are linked. The Youth category is more vulnarable to unemployment than the adult category, which in turn correlate with higher crime rates. Kessler et al. (2021) finds that reducing youth unemployment reduces youth criminality.
 
 ## 3.6 Event analysis
-
-Analyze the relationship between two variables.
 
 ```{r analysis}
 pivot_agg_data <- agg_merged %>%
@@ -377,14 +355,17 @@ ggplot(pivot_agg_data, aes(x = year, y = value, colour = variable )) +
   annotate("text", x = 2017, y = 9, label = "2008\ngreat-recession")
 ```
 
-Graph of Aggregate Crime per Capita and Aggregate unemployment in the Netherlands through time. Furthermore our temporal events: the Oil crisis 1979 and the Financial crisis 2008 are highlighted. 
+After the Oil-crisis in 1979, The Netherlands would experience significant unemployment and crime per capita. According to Ingeschiedenis.nl this was due to The Netherlands having a high budget deficit and to little government intervention in accordance with the Keynesian economic view of the time period (Bezuinigen En Hervormingen in De Jaren ’80, 2022). After the 2008 financial crisis The Netherlands would find itself in a similar position with unemployment rising, however crime per capita would fall in the next 5 years to historic lows. What explains this phenomenon? An explanation by Ingschiedenis.nl is that while the Netherlands decided after 1985 to reduce wages and the budget deficit, The Netherlands in 2008 decided to increase spending, this decision would be later reversed in the 2010’s to a policy of fiscal conservatism (Bezuinigen En Hervormingen in De Jaren ’80, 2022). A possible explanation for the movement of crime per capita in accordance with unemployment in 1980 to an inverse movement in 2008 could be the fact that the population is much younger in 1980 compared to 2008 and thus more people are in their peak-crime committing age 18-35 (Bezuinigen En Hervormingen in De Jaren ’80, 2022). Another explanation is that the welfare safety net was much more robust in 2008 than in the 1980’s which means that people who were unemployed where less inclined to do crime (Bezuinigen En Hervormingen in De Jaren ’80, 2022).
 
 # Part 4 - Discussion
 
-After the Oil-crisis in 1979, The Netherlands would experience significant unemployment and crime per capita. According to Ingeschiedenis.nl this was due to The Netherlands having a high budget deficit and to little government intervention in accordance with the Keynesian economic view of the time period (Bezuinigen En Hervormingen in De Jaren ’80, 2022). After the 2008 financial crisis The Netherlands would find itself in a similar position with unemployment rising, however crime per capita would fall in the next 5 years to historic lows. What explains this phenomenon? An explanation by Ingschiedenis.nl is that while the Netherlands decided after 1985 to reduce wages and the budget deficit, The Netherlands in 2008 decided to increase spending, this decision would be later reversed in the 2010’s to a policy of fiscal conservatism (Bezuinigen En Hervormingen in De Jaren ’80, 2022). A possible explanation for the movement of crime per capita in accordance with unemployment in 1980 to an inverse movement in 2008 could be the fact that the population is much younger in 1980 compared to 2008 and thus more people are in their peak-crime committing age 18-35 (Bezuinigen En Hervormingen in De Jaren ’80, 2022). Another explanation is that the welfare safety net was much more robust in 2008 than in the 1980’s which means that people who were unemployed where less inclined to do crime (Bezuinigen En Hervormingen in De Jaren ’80, 2022).
-
-
 ## 4.1 Discuss your findings
+
+Under each plot certain trends and implactions where already discussed. By reviewing each plot as part of the whole, certain implacations and conclusions can be drawn.
+
+Unemployment is likely a catalyst for crime. I.E. unemployment is related to various social factors which might directly impact potency to commit crimes, such as..
+
+These results can be of interest for policy makers, as not only battling unemployment helps prevent crime, but setting up other social programs might reduce blowbacks of unemployment. Allocating funds towards vulnabrae groups and areas with a high population density will achieve the greatest results.
 
 # Part 5 - Reproducibility
 
@@ -394,17 +375,4 @@ Provide the link to your PUBLIC repository here: ...
 
 ## 5.2 Reference list
 
-Problem Motivation:
-Fischer, T. (2015). De relatie tussen werk en criminaliteit uitgeplozen. Tijdschrift voor Criminologie, 57(3), 334–338. https://www.boomportaal.nl/tijdschrift/TvC/TvC_0165-182X_2015_057_003_008 
-Nieuws Sociaal en Groen. (2023). Criminaliteit: de stand van zaken in Nederland. Retrieved from https://nieuwsociaalengroen.nl/criminaliteit/
-Verbruggen, J. (2014). Previously institutionalized youths on the road to adulthood: A longitudinal study on employment and crime. [PhD-Thesis - Research and graduation internal, Vrije Universiteit Amsterdam].
-Data:
-Statline. (2025). Arbeidsdeelname; provincie, 2013–2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/85268NED/table?dl=BE1FB 
-Cbs. (2025). Geregistreerde criminaliteit; soort misdrijf, regio, 2010-2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/85268NED/table?dl=BE1FB 
-Statline. (2025). Bevolkingsontwikkeling; regio per maand, 2002-2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/37230ned/table 
-Statline. (2006). Volkstelling; oppervlakten, 1930 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/71118NED/table 
-Statline. (2025). Geregistreerde criminaliteit, 1948-2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/83723NED/table 
-Statline. (2025). Verdachten; geslacht, leeftijd, herkomst, opleiding, huishoudensinkomen, 2010-2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/85658NED/table   
-Statline. (2025). Arbeidsdeelname; kerncijfers, 2013-2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/85264NED/table?dl=BE1F8 
-Descriptions:
-Bezuinigen en hervormingen in de jaren ’80. (2022, June 21).  IsGeschiedenis. https://isgeschiedenis.nl/nieuws/bezuinigen-en-hervormingen-in-de-jaren-80
+Use APA referencing throughout your document.
