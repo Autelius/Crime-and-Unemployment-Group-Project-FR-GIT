@@ -29,11 +29,15 @@ Use APA referencing throughout your document. [Here's a link to some explanation
 
 ## 1.1 Describe the Social Problem
 
-Include the following:
+Our Social problem is to look at the relation between crime and unemployment, since these are often believed to be related with each other. Unemployment can cause financial stress and social exclusion, these factors can lead to criminal activity. Criminal records can also lower the chances of being accepted for a job, which makes criminal activity an easier option.
 
--   Why is this relevant?
+Why this is a relevant issue, even though crime rates in the Netherlands have seen a steady decline. Financial and online crime are relatively growing (Nieuws Sociaal en Groen, 2023). Whilst youth unemployment remains a prominent issue in vulnerable communities. Understanding the relationship between unemployment and crime is highly important for the design of social and economic policies.
 
--   ...
+A study by Verbruggen(2014), reviewed by Fischer(2015) shows a critical perspective on the relationship between crime and unemployment. It shows that employment is generally associated with lower crime rates, however it also shows that unemployment doesn’t necessarily lead to more crime.
+
+Whilst Verbruggen's study gives a good insight into the vulnerable Dutch population, broader analyses of this problem are still very limited. How structural shifts affect this relationship for example. Additionally, the understanding of spatial and subgroup variations in the Netherlands are also limited.
+
+We aim to contribute towards the limited understanding of the special and subgroup variations.
 
 # Part 2 - Data Sourcing
 
@@ -396,7 +400,8 @@ ggplot(pivot_agg_data, aes(x = year, y = value, colour = variable )) +
 
 
 ```
-After the Oil-crisis in 1979, The Netherlands would experience significant unemployment and crime per capita. According to Ingeschiedenis.nl this was due to The Netherlands having a high budget deficit and to little government intervention in accordance with the Keynesian economic view of the time period (Bezuinigen En Hervormingen in De Jaren ’80, 2022). After the 2008 financial crisis The Netherlands would find itself in a similar position with unemployment rising, however crime per capita would fall in the next 5 years to historic lows. What explains this phenomenon? An explanation by Ingschiedenis.nl is that while the Netherlands decided after 1985 to reduce wages and the budget deficit, The Netherlands in 2008 decided to increase spending, this decision would be later reversed in the 2010’s to a policy of fiscal conservatism (Bezuinigen En Hervormingen in De Jaren ’80, 2022). A possible explanation for the movement of crime per capita in accordance with unemployment in 1980 to an inverse movement in 2008 could be the fact that the population is much younger in 1980 compared to 2008 and thus more people are in their peak-crime committing age 18-35 (Bezuinigen En Hervormingen in De Jaren ’80, 2022). Another explanation is that the welfare safety net was much more robust in 2008 than in the 1980’s which means that people who were unemployed where less inclined to do crime (Bezuinigen En Hervormingen in De Jaren ’80, 2022). 
+
+After the Oil-crisis in 1979, The Netherlands would experience significant unemployment and crime per capita. According to Ingeschiedenis.nl this was due to The Netherlands having a high budget deficit and to little government intervention in accordance with the Keynesian economic view of the time period (Bezuinigen En Hervormingen in De Jaren ’80, 2022). After the 2008 financial crisis The Netherlands would find itself in a similar position with unemployment rising, however crime per capita would fall in the next 5 years to historic lows. What explains this phenomenon? An explanation by Ingschiedenis.nl is that while the Netherlands decided after 1985 to reduce wages and the budget deficit, The Netherlands in 2008 decided to increase spending, this decision would be later reversed in the 2010’s to a policy of fiscal conservatism (Bezuinigen En Hervormingen in De Jaren ’80, 2022). A possible explanation for the movement of crime per capita in accordance with unemployment in 1980 to an inverse movement in 2008 could be the fact that the population is much younger in 1980 compared to 2008 and thus more people are in their peak-crime committing age 18-35 (Bezuinigen En Hervormingen in De Jaren ’80, 2022). Another explanation is that the welfare safety net was much more robust in 2008 than in the 1980’s which means that people who were unemployed where less inclined to do crime (Bezuinigen En Hervormingen in De Jaren ’80, 2022).
 
 # Part 4 - Discussion
 
