@@ -94,7 +94,7 @@ merged_data <- cbind(DS_Panel_Unemployment, DS_Panel_Crime [, 5])
 
 merged_data <-cbind(merged_data, DS_Population [, 4])
 
-merged_data <- merged_data [, -c(1:2)] 
+merged_data <- merged_data [, -c(1)] 
 colnames(merged_data) <- c("Year", "province", "Unemployment_Rate", "total_Crimes", "Population")
 
 merged_data <- mutate(merged_data, crimes_per_capita = (total_Crimes/Population)*100)
