@@ -393,8 +393,7 @@ ggplot(pivot_agg_data, aes(x = year, y = value, colour = variable )) +
 
 
 ```
-
-Here you provide a description of why the plot above is relevant to your specific social problem.
+After the Oil-crisis in 1979, The Netherlands would experience significant unemployment and crime per capita. According to Ingeschiedenis.nl this was due to The Netherlands having a high budget deficit and to little government intervention in accordance with the Keynesian economic view of the time period (Bezuinigen En Hervormingen in De Jaren ’80, 2022). After the 2008 financial crisis The Netherlands would find itself in a similar position with unemployment rising, however crime per capita would fall in the next 5 years to historic lows. What explains this phenomenon? An explanation by Ingschiedenis.nl is that while the Netherlands decided after 1985 to reduce wages and the budget deficit, The Netherlands in 2008 decided to increase spending, this decision would be later reversed in the 2010’s to a policy of fiscal conservatism (Bezuinigen En Hervormingen in De Jaren ’80, 2022). A possible explanation for the movement of crime per capita in accordance with unemployment in 1980 to an inverse movement in 2008 could be the fact that the population is much younger in 1980 compared to 2008 and thus more people are in their peak-crime committing age 18-35 (Bezuinigen En Hervormingen in De Jaren ’80, 2022). Another explanation is that the welfare safety net was much more robust in 2008 than in the 1980’s which means that people who were unemployed where less inclined to do crime (Bezuinigen En Hervormingen in De Jaren ’80, 2022). 
 
 # Part 4 - Discussion
 
