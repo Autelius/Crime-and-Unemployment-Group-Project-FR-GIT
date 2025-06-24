@@ -317,7 +317,7 @@ ggplot(nl_crime) +
   )
 ```
 
-Here you provide a description of why the plot above is relevant to your specific social problem.
+The plot above shows the unemployment rate in % per province in the Netherlands. It indicates that the unemployment rate is highest in more urbanized provinces with the exception of the province of Groningen (upper right).
 
 ## 3.5 Visualize sub-population variation
 
@@ -364,7 +364,7 @@ After the Oil-crisis in 1979, The Netherlands would experience significant unemp
 
 ## 4.1 Discuss your findings
 
-Under each plot certain trends and implactions where already discussed. By reviewing each plot as part of the whole, certain implacations and conclusions can be drawn.
+Under each plot certain trends and implacations where already discussed. By reviewing each plot as part of the whole, certain implacations and conclusions can be drawn.
 
 Unemployment is likely a catalyst for crime. I.E. unemployment is related to various social factors which might directly impact potency to commit crimes, such as..
 
