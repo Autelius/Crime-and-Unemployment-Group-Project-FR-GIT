@@ -259,7 +259,7 @@ nl_prov <- st_read(
 #Reading the CSV  →  2023 only
 crime <- read_csv("data/working_data/merged_panel_data_final.csv",
                   show_col_types = FALSE) |>
-  filter(year == 2023) |>
+  filter(Year == 2023) |>
   mutate(
     province = sub(" \\(PV\\)$", "", province),        
     province = recode(province, "Fryslân" = "Friesland")
