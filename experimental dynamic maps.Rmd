@@ -8,12 +8,7 @@ Lecturer : Jack Flitzgerald, Chantal Schouwenaar
 date: "`r Sys.Date()`"
 output: pdf_document
 ---
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-  fig.align = "center",
-  fig.show  = "hold",
-)
-```
+
 # Set-up your environment
 
 ```{r package_install, include=FALSE}
