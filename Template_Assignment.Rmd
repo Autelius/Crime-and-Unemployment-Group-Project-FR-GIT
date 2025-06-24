@@ -13,10 +13,14 @@ output: pdf_document
 
 ```{r package_install, include=FALSE}
 install.packages("tidyverse")
+install.packages("cbsodataR")
+install.packages("sf")
 ```
 
 ```{r packages}
 require(tidyverse)
+require(cbsodataR)
+require(sf)
 ```
 
 # Part 1 - Identify a Social Problem
@@ -240,14 +244,6 @@ ggplot(pivot_agg_data, aes(x = year, y = value, colour = variable )) +
 ```
 
 ## 3.4 Visualize spatial variation
-
-```{r crime-heatmap, echo=TRUE, message=FALSE, warning=FALSE}
-library(sf)
-library(ggplot2)
-library(cbsodataR)
-library(dplyr)       
-library(readr)
-```
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE}
 cbs_maps <- cbs_get_maps()
