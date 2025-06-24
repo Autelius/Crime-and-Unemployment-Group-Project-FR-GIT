@@ -190,7 +190,7 @@ Please use a separate 'R block' of code for each type of cleaning. So, e.g. one 
 
 ## 3.2 Generate necessary variables
 
-Variable 1 and 2 (Crimes per capita and Unemployment per capita)
+Variable 1 and 2 (Crimes per capita and population density)
 
 ```{r gen_var1 and 2}
 agg_merged <- agg_merged %>%
@@ -317,8 +317,6 @@ ggplot(nl_crime) +
   )
 ```
 
-Here you provide a description of why the plot above is relevant to your specific social problem.
-
 ## 3.5 Visualize sub-population variation
 
 ```{r visualise_subpopulations}
@@ -338,7 +336,7 @@ ggplot(unemployment_age, aes(x = Age, y = Unemployment)) +
   ) 
 ```
 
-In the boxplots above, it is clearly visible that unemployment and crime are linked. The Youth category is more vulnarable to unemployment than the adult category, which in turn correlate with higher crime rates. Kessler et al. (2021) finds that reducing youth unemployment reduces youth criminality.
+In the boxplots above, it is clearly visible that unemployment and crime are linked. The Youth category is more vulnarable to unemployment than the adult category (Yeung & Yang, 2020), which in turn correlates with higher crime rates. Kessler et al. (2021) finds that reducing youth unemployment reduces youth crimes.
 
 ## 3.6 Event analysis
 
@@ -358,7 +356,7 @@ ggplot(pivot_agg_data, aes(x = year, y = value, colour = variable )) +
   annotate("text", x = 2017, y = 9, label = "2008\ngreat-recession")
 ```
 
-After the Oil-crisis in 1979, The Netherlands would experience significant unemployment and crime per capita. According to Ingeschiedenis.nl this was due to The Netherlands having a high budget deficit and to little government intervention in accordance with the Keynesian economic view of the time period (Bezuinigen En Hervormingen in De Jaren ’80, 2022). After the 2008 financial crisis The Netherlands would find itself in a similar position with unemployment rising, however crime per capita would fall in the next 5 years to historic lows. What explains this phenomenon? An explanation by Ingschiedenis.nl is that while the Netherlands decided after 1985 to reduce wages and the budget deficit, The Netherlands in 2008 decided to increase spending, this decision would be later reversed in the 2010’s to a policy of fiscal conservatism (Bezuinigen En Hervormingen in De Jaren ’80, 2022). A possible explanation for the movement of crime per capita in accordance with unemployment in 1980 to an inverse movement in 2008 could be the fact that the population is much younger in 1980 compared to 2008 and thus more people are in their peak-crime committing age 18-35 (Bezuinigen En Hervormingen in De Jaren ’80, 2022). Another explanation is that the welfare safety net was much more robust in 2008 than in the 1980’s which means that people who were unemployed where less inclined to do crime (Bezuinigen En Hervormingen in De Jaren ’80, 2022).
+Both 1979 oil-crises and the 2008 recession see large spikes in unemployment, yet only 1979 sees an increase in crimp per capita as well. A possible explanation for the movement of crime per capita in accordance with unemployment in 1980 to an inverse movement in 2008 could be the fact that the population is much younger in 1980 compared to 2008 and thus more people are in their peak-crime committing age 18-35 (Bezuinigen En Hervormingen in De Jaren ’80, 2022). Another explanation is that the welfare safety net was much more robust in 2008 than in the 1980’s which means that people who were unemployed where less inclined to do crime (Bezuinigen En Hervormingen in De Jaren ’80, 2022). This shows that while unemployment may be linked in some cases, other factors play a significant role as well.
 
 # Part 4 - Discussion
 
