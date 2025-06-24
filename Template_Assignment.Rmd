@@ -296,7 +296,7 @@ ggplot(nl_crime) +
 <<<<<<< HEAD
 =======
 
-We can generally see the pattern that crime per capita follows unemployment. An anomaly is Groningen. Its crime unemployment is fairly high, yet crime per capita is low. Similarly, Utrecht's unemployment is low yet its crime per capita is somewhat higher. If population density is considered, than this pattern migh be better explained. Furthermore,  Other factors can also affect cause these anomalies, which shows that the connection is not as straighforward. Individual cities and munciplaties were not plotted, which impacts our abilitiy to draw conclusions. 
+We can generally see the pattern that crime per capita follows unemployment. An anomaly is Groningen. Its unemployment is high, yet crime per capita is failry low. Similarly, Flevoland's unemployment is fairly yet its crime per capita is somewhat lower. If population density is considered, than this pattern migh be better explained. Furthermore,  Other factors can also affect cause these anomalies, which shows that the connection is not as straighforward. Individual cities and munciplaties were not plotted, which impacts our abilitiy to draw conclusions. 
 
 
 >>>>>>> d22ac6077aa71c465abe179b2f0ae4d7a514a3ae
