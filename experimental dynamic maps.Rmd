@@ -6,11 +6,9 @@ output: html_document
 ---
 
 ```{r crime-heatmap, echo=TRUE, message=FALSE, warning=FALSE}
-library(sf)
-library(ggplot2)
-library(cbsodataR)
-library(dplyr)       
-library(readr)
+require(tidyverse)
+require(cbsodataR)
+require(sf)
 ```
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE}
@@ -27,7 +25,7 @@ nl_prov <- st_read(
 #Reading the CSV  →  2023 only
 crime <- read_csv("data/working_data/merged_panel_data_final.csv",
                   show_col_types = FALSE) |>
-  filter(year == 2023) |>
+  filter(Year == 2023) |>
   mutate(
     province = sub(" \\(PV\\)$", "", province),        
     province = recode(province, "Fryslân" = "Friesland")
@@ -70,10 +68,10 @@ ggplot(nl_crime) +
 ```{r pop-heatmap, echo=TRUE, message=FALSE, warning=FALSE}
 
 ggplot(nl_crime) +
-  geom_sf(aes(fill = poplation_density), color = "white", size = 0.2) +
+  geom_sf(aes(fill = population_density), color = "white", size = 0.2) +
   scale_fill_gradient(
-    low  = "#deebf7",  # pale blue
-    high = "#08306b",  # dark blue
+    low  = "#deebf7", 
+    high = "#08306b", 
     na.value = "grey90",
     name = "Population\ndensity"
   ) +
