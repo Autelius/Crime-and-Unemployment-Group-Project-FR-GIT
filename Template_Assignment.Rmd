@@ -377,9 +377,12 @@ ggplot(pivot_agg_data, aes(x = year, y = value, colour = variable )) +
   annotate("text", x = 2017, y = 9, label = "2008\ngreat-recession")
 ```
 
-After the Oil-crisis in 1979, The Netherlands would experience significant unemployment and crime per capita. According to Ingeschiedenis.nl this was due to The Netherlands having a high budget deficit and to little government intervention in accordance with the Keynesian economic view of the time period (Bezuinigen En Hervormingen in De Jaren ’80, 2022). After the 2008 financial crisis The Netherlands would find itself in a similar position with unemployment rising, however crime per capita would fall in the next 5 years to historic lows. What explains this phenomenon? An explanation by Ingschiedenis.nl is that while the Netherlands decided after 1985 to reduce wages and the budget deficit, The Netherlands in 2008 decided to increase spending, this decision would be later reversed in the 2010’s to a policy of fiscal conservatism (Bezuinigen En Hervormingen in De Jaren ’80, 2022). A possible explanation for the movement of crime per capita in accordance with unemployment in 1980 to an inverse movement in 2008 could be the fact that the population is much younger in 1980 compared to 2008 and thus more people are in their peak-crime committing age 18-35 (Bezuinigen En Hervormingen in De Jaren ’80, 2022). Another explanation is that the welfare safety net was much more robust in 2008 than in the 1980’s which means that people who were unemployed where less inclined to do crime (Bezuinigen En Hervormingen in De Jaren ’80, 2022).
+Graph of Aggregate Crime per Capita and Aggregate unemployment in the Netherlands through time. Furthermore our temporal events: the Oil crisis 1979 and the Financial crisis 2008 are highlighted. 
 
 # Part 4 - Discussion
+
+After the Oil-crisis in 1979, The Netherlands would experience significant unemployment and crime per capita. According to Ingeschiedenis.nl this was due to The Netherlands having a high budget deficit and to little government intervention in accordance with the Keynesian economic view of the time period (Bezuinigen En Hervormingen in De Jaren ’80, 2022). After the 2008 financial crisis The Netherlands would find itself in a similar position with unemployment rising, however crime per capita would fall in the next 5 years to historic lows. What explains this phenomenon? An explanation by Ingschiedenis.nl is that while the Netherlands decided after 1985 to reduce wages and the budget deficit, The Netherlands in 2008 decided to increase spending, this decision would be later reversed in the 2010’s to a policy of fiscal conservatism (Bezuinigen En Hervormingen in De Jaren ’80, 2022). A possible explanation for the movement of crime per capita in accordance with unemployment in 1980 to an inverse movement in 2008 could be the fact that the population is much younger in 1980 compared to 2008 and thus more people are in their peak-crime committing age 18-35 (Bezuinigen En Hervormingen in De Jaren ’80, 2022). Another explanation is that the welfare safety net was much more robust in 2008 than in the 1980’s which means that people who were unemployed where less inclined to do crime (Bezuinigen En Hervormingen in De Jaren ’80, 2022).
+
 
 ## 4.1 Discuss your findings
 
@@ -391,4 +394,17 @@ Provide the link to your PUBLIC repository here: ...
 
 ## 5.2 Reference list
 
-Use APA referencing throughout your document.
+Problem Motivation:
+Fischer, T. (2015). De relatie tussen werk en criminaliteit uitgeplozen. Tijdschrift voor Criminologie, 57(3), 334–338. https://www.boomportaal.nl/tijdschrift/TvC/TvC_0165-182X_2015_057_003_008 
+Nieuws Sociaal en Groen. (2023). Criminaliteit: de stand van zaken in Nederland. Retrieved from https://nieuwsociaalengroen.nl/criminaliteit/
+Verbruggen, J. (2014). Previously institutionalized youths on the road to adulthood: A longitudinal study on employment and crime. [PhD-Thesis - Research and graduation internal, Vrije Universiteit Amsterdam].
+Data:
+Statline. (2025). Arbeidsdeelname; provincie, 2013–2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/85268NED/table?dl=BE1FB 
+Cbs. (2025). Geregistreerde criminaliteit; soort misdrijf, regio, 2010-2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/85268NED/table?dl=BE1FB 
+Statline. (2025). Bevolkingsontwikkeling; regio per maand, 2002-2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/37230ned/table 
+Statline. (2006). Volkstelling; oppervlakten, 1930 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/71118NED/table 
+Statline. (2025). Geregistreerde criminaliteit, 1948-2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/83723NED/table 
+Statline. (2025). Verdachten; geslacht, leeftijd, herkomst, opleiding, huishoudensinkomen, 2010-2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/85658NED/table   
+Statline. (2025). Arbeidsdeelname; kerncijfers, 2013-2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/85264NED/table?dl=BE1F8 
+Descriptions:
+Bezuinigen en hervormingen in de jaren ’80. (2022, June 21).  IsGeschiedenis. https://isgeschiedenis.nl/nieuws/bezuinigen-en-hervormingen-in-de-jaren-80
