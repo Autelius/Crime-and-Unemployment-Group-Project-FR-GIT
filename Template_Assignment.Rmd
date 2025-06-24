@@ -29,11 +29,15 @@ Use APA referencing throughout your document. [Here's a link to some explanation
 
 ## 1.1 Describe the Social Problem
 
-Include the following:
+Our Social problem is to look at the relation between crime and unemployment, since these are often believed to be related with each other. Unemployment can cause financial stress and social exclusion, these factors can lead to criminal activity. Criminal records can also lower the chances of being accepted for a job, which makes criminal activity an easier option.
 
--   Why is this relevant?
+Why this is a relevant issue, even though crime rates in the Netherlands have seen a steady decline. Financial and online crime are relatively growing (Nieuws Sociaal en Groen, 2023). Whilst youth unemployment remains a prominent issue in vulnerable communities. Understanding the relationship between unemployment and crime is highly important for the design of social and economic policies.
 
--   ...
+A study by Verbruggen(2014), reviewed by Fischer(2015) shows a critical perspective on the relationship between crime and unemployment. It shows that employment is generally associated with lower crime rates, however it also shows that unemployment doesn’t necessarily lead to more crime.
+
+Whilst Verbruggen's study gives a good insight into the vulnerable Dutch population, broader analyses of this problem are still very limited. How structural shifts affect this relationship for example. Additionally, the understanding of spatial and subgroup variations in the Netherlands are also limited.
+
+We aim to contribute towards the limited understanding of the special and subgroup variations.
 
 # Part 2 - Data Sourcing
 
@@ -68,13 +72,16 @@ unemployment_age <- read.csv("data/raw_data/unemployment_per_age.csv")
 
 ```
 
-In this case we see 28 variables, but we miss some information on what units they are in. We also don't know anything about the year/moment in which this data has been captured.
-
 ``` r
-inline_code = TRUE
 ```
 
-These are things that are usually included in the metadata of the dataset. For your project, you need to provide us with the information from your metadata that we need to understand your dataset of choice.
+The data sets are categorized within 3 categories: province level, aggregate and sub population.
+
+Province level: Includes 4 data sets. Two are self explanatory. Population data gives the population per year per province. Area data gives the area per province (per year). Our main data sets are the employment and crime data sets. DS_panel_Unemployment is raw panel data extracted from CBS. For every year and province the unemployment unemployment rate - (non-employed working population/working population)\*100 -, is given. Similarly, DS_Panel_Crime gives the total amount of reported crimes per year per province. All reported crimes are considered, such as violent, financial and petty crimes. After data cleaning, these provincial panel data sets will be useful to visualize spatial variation.
+
+Aggregate level: These raw data sets focus on the aggregate level of crime and unemployment in the Netherlands. For agg_unemployment the aggregate unemployment rate per year in the Netherlands is given. For agg_crime the same is done, but then with total reported crimes. Each years population is included in the agg_population data set. After data cleaning, these aggregate data sets will be useful to visualize temporal variation, and the aggregate connection between crime and unemployment.
+
+Subpopulation: Similair to previous data sets, the subpopulation data sets provide information of crime and unemployment per age group.
 
 ## 2.3 Describe the type of variables included
 
@@ -394,7 +401,7 @@ ggplot(pivot_agg_data, aes(x = year, y = value, colour = variable )) +
 
 ```
 
-Here you provide a description of why the plot above is relevant to your specific social problem.
+After the Oil-crisis in 1979, The Netherlands would experience significant unemployment and crime per capita. According to Ingeschiedenis.nl this was due to The Netherlands having a high budget deficit and to little government intervention in accordance with the Keynesian economic view of the time period (Bezuinigen En Hervormingen in De Jaren ’80, 2022). After the 2008 financial crisis The Netherlands would find itself in a similar position with unemployment rising, however crime per capita would fall in the next 5 years to historic lows. What explains this phenomenon? An explanation by Ingschiedenis.nl is that while the Netherlands decided after 1985 to reduce wages and the budget deficit, The Netherlands in 2008 decided to increase spending, this decision would be later reversed in the 2010’s to a policy of fiscal conservatism (Bezuinigen En Hervormingen in De Jaren ’80, 2022). A possible explanation for the movement of crime per capita in accordance with unemployment in 1980 to an inverse movement in 2008 could be the fact that the population is much younger in 1980 compared to 2008 and thus more people are in their peak-crime committing age 18-35 (Bezuinigen En Hervormingen in De Jaren ’80, 2022). Another explanation is that the welfare safety net was much more robust in 2008 than in the 1980’s which means that people who were unemployed where less inclined to do crime (Bezuinigen En Hervormingen in De Jaren ’80, 2022).
 
 # Part 4 - Discussion
 
