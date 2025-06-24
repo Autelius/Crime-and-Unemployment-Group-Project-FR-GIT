@@ -55,23 +55,11 @@ unemployment_age <- read.csv("data/raw_data/unemployment_per_age.csv")
 
 ## 2.2 Provide a short summary of the dataset's
 
-The data sets are categorized within 3 categories: province level, aggregate and sub population.
+The data sets are categorized within 3 categories: province level, aggregate and sub population. 
 
-Province level: Includes 4 data sets. Two are self explanatory. Population data gives the population per year per province. Area data gives the area per province (per year). Our main data sets are the employment and crime data sets. DS_panel_Unemployment is raw panel data extracted from CBS. For every year and province the unemployment unemployment rate - (non-employed working population/working population)\*100 -, is given. Similarly, DS_Panel_Crime gives the total amount of reported crimes per year per province. All reported crimes are considered, such as violent, financial and petty crimes. After data cleaning, these provincial panel data sets will be useful to visualize spatial variation.
+## 2.3 limitations
 
-Aggregate level: These raw data sets focus on the aggregate level of crime and unemployment in the Netherlands. For agg_unemployment the aggregate unemployment rate per year in the Netherlands is given. For agg_crime the same is done, but then with total reported crimes. Each years population is included in the agg_population data set. After data cleaning, these aggregate data sets will be useful to visualize temporal variation, and the aggregate connection between crime and unemployment.
-
-Subpopulation: Similair to previous data sets, the subpopulation data sets provide information of crime and unemployment per age group.
-
-## 2.3 Describe the type of variables included
-
-Think of things like:
-
--   Do the variables contain health information or SES information?
-
--   Have they been measured by interviewing individuals or is the data coming from administrative sources?
-
-*For the sake of this example, I will continue with the assignment...*
+For crime statistics, Only crimes that are registered are accounted for, however there are also crimes that have not been reported and thus not counted in this dataset. The data does not distinguish if perpratrators were unemployed. So conclusions drawn from this data can never be entirely valid. Additionally, people reported as unemployed might do undeclared work. 
 
 # Part 3 - Quantifying
 
@@ -179,8 +167,6 @@ unemployment_age$Unemployment <- gsub(",", ".", unemployment_age$Unemployment)
 unemployment_age$Unemployment <- as.numeric(unemployment_age$Unemployment)
 ```
 
-Please use a separate 'R block' of code for each type of cleaning. So, e.g. one for missing values, a new one for removing unnecessary variables etc.
-
 ## 3.2 Generate necessary variables
 
 Variable 1 and 2 (Crimes per capita and population density)
@@ -214,6 +200,8 @@ ggplot(pivot_agg_data, aes(x = year, y = value, colour = variable )) +
   labs(title = "aggragate crime and unemployment through time", x = "year", y = "variable") +
   scale_x_continuous(breaks = seq(1975, 2024, by = 5), limits = c(1972, 2026))
 ```
+This time series can be seperated into two larger periods. Pre 2000 where crime seems to follow unemployment, and post 2000 where crime seems less corralated to unemployment, apart from certain periods. Surprisingly, unemployment seems to be lagging behind crime in certain periods. 
+
 
 ## 3.4 Visualize spatial variation
 
@@ -310,7 +298,7 @@ ggplot(nl_crime) +
 <<<<<<< HEAD
 =======
 
-We can generally see the pattern that crime per capita follows unemployment. An anomaly is Groningen.Its crime unemployment is fairly high, yet crime per capita is low. Similarly, Utrecht's unemployment is low yet its crime per capita is somewhat higher. If population density is considered, than this pattern migh be better explained. 
+We can generally see the pattern that crime per capita follows unemployment. An anomaly is Groningen. Its crime unemployment is fairly high, yet crime per capita is low. Similarly, Utrecht's unemployment is low yet its crime per capita is somewhat higher. If population density is considered, than this pattern migh be better explained.Furthermore,  Other factors can also affect cause these anomalies, which shows that the connection is not as straighforward. Individual cities and munciplaties were not plotted, which impacts our abilitiy to draw conclusions. 
 
 
 >>>>>>> d22ac6077aa71c465abe179b2f0ae4d7a514a3ae
@@ -353,17 +341,13 @@ ggplot(pivot_agg_data, aes(x = year, y = value, colour = variable )) +
   annotate("text", x = 2017, y = 9, label = "2008\ngreat-recession")
 ```
 
-Both 1979 oil-crises and the 2008 recession see large spikes in unemployment, yet only 1979 sees an increase in crimp per capita as well. A possible explanation for the movement of crime per capita in accordance with unemployment in 1980 to an inverse movement in 2008 could be the fact that the population is much younger in 1980 compared to 2008 and thus more people are in their peak-crime committing age 18-35 (Bezuinigen En Hervormingen in De Jaren ’80, 2022). Another explanation is that the welfare safety net was much more robust in 2008 than in the 1980’s which means that people who were unemployed where less inclined to do crime (Bezuinigen En Hervormingen in De Jaren ’80, 2022). This shows that while unemployment may be linked in some cases, other factors play a significant role as well.
+Both 1979 oil-crises and the 2008 recession see large spikes in unemployment, yet only 1979 sees an increase in crimp per capita as well. A possible explanation for the movement of crime per capita in accordance with unemployment in 1980 to an inverse movement in 2008 could be the fact that the population is much younger in 1980 compared to 2008 and thus more people are in their peak-crime committing age 18-35 (Bezuinigen En Hervormingen in De Jaren ’80, 2022). Another explanation is that the welfare safety net was much more robust in 2008 than in the 1980’s which means that people who were unemployed where less inclined to do crime (Bezuinigen En Hervormingen in De Jaren ’80, 2022). This shows that while unemployment may be linked in some cases, other factors play a significant role as well. Furthermore, trends in crime per capita predates trends in unemployment during both events, which negatively impacts the validity of our conclusions. 
 
 # Part 4 - Discussion
 
 ## 4.1 Discuss your findings
 
-Under each plot certain trends and implacations where already discussed. By reviewing each plot as part of the whole, certain implacations and conclusions can be drawn.
-
-Unemployment is likely a catalyst for crime. I.E. unemployment is related to various social factors which might directly impact potency to commit crimes, such as..
-
-These results can be of interest for policy makers, as not only battling unemployment helps prevent crime, but setting up other social programs might reduce blowbacks of unemployment. Allocating funds towards vulnabrae groups and areas with a high population density will achieve the greatest results.
+The clearly shows that unemployment and crime are correlated, but also implicates that there is not a direct causality between unemployment and crime. Unemployment is likely a catalyst for crime. That is, unemployment is related to various social factors which might directly impact potency to commit crimes. These results can be of interest for policy makers, as not only battling unemployment helps prevent crime, but setting up other social programs might reduce blowbacks of unemployment. Allocating funds towards vulnarable groups, such as youth,  and areas with a high population density will achieve the greatest results. 
 
 # Part 5 - Reproducibility
 
@@ -373,4 +357,27 @@ Provide the link to your PUBLIC repository here: ...
 
 ## 5.2 Reference list
 
-Use APA referencing throughout your document.
+Fischer, T. (2015). De relatie tussen werk en criminaliteit uitgeplozen. Tijdschrift voor Criminologie, 57(3), 334–338.
+https://www.boomportaal.nl/tijdschrift/TvC/TvC_0165-182X_2015_057_003_008 
+
+Nieuws Sociaal en Groen. (2023). Criminaliteit: de stand van zaken in Nederland. Retrieved from https://nieuwsociaalengroen.nl/criminaliteit/
+
+Verbruggen, J. (2014). Previously institutionalized youths on the road to adulthood: A longitudinal study on employment and crime. [PhD-Thesis - Research and graduation internal, Vrije Universiteit Amsterdam].
+
+Statline. (2025). Arbeidsdeelname; provincie, 2013–2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/85268NED/table?dl=BE1FB 
+
+Cbs. (2025). Geregistreerde criminaliteit; soort misdrijf, regio, 2010-2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/85268NED/table?dl=BE1FB 
+
+Statline. (2025). Bevolkingsontwikkeling; regio per maand, 2002-2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/37230ned/table 
+
+Statline. (2006). Volkstelling; oppervlakten, 1930 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/71118NED/table 
+
+Statline. (2025). Geregistreerde criminaliteit, 1948-2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/83723NED/table 
+
+Statline. (2025). Verdachten; geslacht, leeftijd, herkomst, opleiding, huishoudensinkomen, 2010-2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/85658NED/table
+
+Statline. (2025). Arbeidsdeelname; kerncijfers, 2013-2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/85264NED/table?dl=BE1F8 
+
+Bezuinigen en hervormingen in de jaren ’80. (2022, June 21).  IsGeschiedenis. https://isgeschiedenis.nl/nieuws/bezuinigen-en-hervormingen-in-de-jaren-80
+
+
