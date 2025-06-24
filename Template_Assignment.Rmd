@@ -418,4 +418,17 @@ Provide the link to your PUBLIC repository here: ...
 
 ## 5.2 Reference list
 
-Use APA referencing throughout your document.
+Problem Motivation:
+Fischer, T. (2015). De relatie tussen werk en criminaliteit uitgeplozen. Tijdschrift voor Criminologie, 57(3), 334–338. https://www.boomportaal.nl/tijdschrift/TvC/TvC_0165-182X_2015_057_003_008 
+Nieuws Sociaal en Groen. (2023). Criminaliteit: de stand van zaken in Nederland. Retrieved from https://nieuwsociaalengroen.nl/criminaliteit/
+Verbruggen, J. (2014). Previously institutionalized youths on the road to adulthood: A longitudinal study on employment and crime. [PhD-Thesis - Research and graduation internal, Vrije Universiteit Amsterdam].
+Data:
+Statline. (2025). Arbeidsdeelname; provincie, 2013–2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/85268NED/table?dl=BE1FB 
+Cbs. (2025). Geregistreerde criminaliteit; soort misdrijf, regio, 2010-2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/85268NED/table?dl=BE1FB 
+Statline. (2025). Bevolkingsontwikkeling; regio per maand, 2002-2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/37230ned/table 
+Statline. (2006). Volkstelling; oppervlakten, 1930 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/71118NED/table 
+Statline. (2025). Geregistreerde criminaliteit, 1948-2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/83723NED/table 
+Statline. (2025). Verdachten; geslacht, leeftijd, herkomst, opleiding, huishoudensinkomen, 2010-2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/85658NED/table   
+Statline. (2025). Arbeidsdeelname; kerncijfers, 2013-2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/85264NED/table?dl=BE1F8 
+Descriptions:
+Bezuinigen en hervormingen in de jaren ’80. (2022, June 21).  IsGeschiedenis. https://isgeschiedenis.nl/nieuws/bezuinigen-en-hervormingen-in-de-jaren-80
