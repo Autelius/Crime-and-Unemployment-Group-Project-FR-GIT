@@ -100,20 +100,24 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdftitle={The relationship between unemployment and crime in the Netherlands},
-  pdfauthor={Romeo Schoonderbeek, 2868407 Paul Claessens, 2859603 Furkan Kadir Öztürk, 2852640 Serena Kula 2856584 Bjorn Smit 2812968 Lia Seo 2841955},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
-\title{The relationship between unemployment and crime in the
-Netherlands}
-\author{Romeo Schoonderbeek, 2868407 Paul Claessens, 2859603 Furkan
-Kadir Öztürk, 2852640 Serena Kula 2856584 Bjorn Smit 2812968 Lia Seo
-2841955}
+\title{\vspace{-2em}
+
+The relationship between unemployment and crime in the Netherlands}
+\author{Romeo Schoonderbeek 2868407, Paul Claessens 2859603,\\
+Furkan Kadir Öztürk 2852640, Serena Kula 2856584,\\
+Bjorn Smit 2812968, Lia Seo 2841955}
 \date{2025-06-24}
 
 \begin{document}
 \maketitle
+
+% ── Shrink overall font to 10pt and tighten spacing ──
+\fontsize{8}{12}\selectfont  
+\setlength{\parskip}{0.5em}
+\setlength{\headsep}{0.5em}
 
 \section{Set-up your environment}\label{set-up-your-environment}
 
@@ -208,7 +212,6 @@ limited understanding of the special and subgroup variations.
 
 \CommentTok{\# subpopulation}
 \NormalTok{criminaliteit\_per\_leeftijd }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"data/raw\_data/criminaliteit\_per\_leeftijd.csv"}\NormalTok{) }
-
 \NormalTok{unemployment\_age }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"data/raw\_data/unemployment\_per\_age.csv"}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
@@ -259,29 +262,18 @@ formal.
 \CommentTok{\# province panel data cleaning}
 
 \NormalTok{merged\_data }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(DS\_Panel\_Unemployment, DS\_Panel\_Crime [, }\DecValTok{5}\NormalTok{])}
-
 \NormalTok{merged\_data }\OtherTok{\textless{}{-}}\FunctionTok{cbind}\NormalTok{(merged\_data, DS\_Population [, }\DecValTok{4}\NormalTok{])}
-
 \NormalTok{merged\_data }\OtherTok{\textless{}{-}}\NormalTok{ merged\_data [, }\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{)] }
 \FunctionTok{colnames}\NormalTok{(merged\_data) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Year"}\NormalTok{, }\StringTok{"province"}\NormalTok{, }\StringTok{"Unemployment\_Rate"}\NormalTok{, }\StringTok{"total\_Crimes"}\NormalTok{, }\StringTok{"Population"}\NormalTok{)}
-
 \NormalTok{merged\_data }\OtherTok{\textless{}{-}} \FunctionTok{mutate}\NormalTok{(merged\_data, }\AttributeTok{crimes\_per\_capita =}\NormalTok{ (total\_Crimes}\SpecialCharTok{/}\NormalTok{Population)}\SpecialCharTok{*}\DecValTok{100}\NormalTok{)}
-
 \FunctionTok{write.csv}\NormalTok{(merged\_data, }\StringTok{"data/working\_data/merged\_panel\_data\_final.csv"}\NormalTok{)}
-
 \NormalTok{area\_data\_working }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"data/raw\_data/area\_data.csv"}\NormalTok{)}
-
 \FunctionTok{colnames}\NormalTok{(area\_data\_working) }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"X"}\NormalTok{, }\StringTok{"province"}\NormalTok{, }\StringTok{"Area(KM2)"}\NormalTok{)}
-
 \NormalTok{area\_data\_working }\OtherTok{\textless{}{-}}\NormalTok{ area\_data\_working[}\DecValTok{6}\SpecialCharTok{:}\DecValTok{17}\NormalTok{ ,]}
-
 \NormalTok{area\_data\_working[[}\DecValTok{3}\NormalTok{]]  }\OtherTok{=} \FunctionTok{as.numeric}\NormalTok{(area\_data\_working[[}\DecValTok{3}\NormalTok{]])}
-
 \NormalTok{area\_data\_working[, }\DecValTok{3}\NormalTok{] }\OtherTok{=}\NormalTok{ area\_data\_working[, }\DecValTok{3}\NormalTok{]}\SpecialCharTok{/} \DecValTok{100}
-
 \NormalTok{flevoland }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{name =} \StringTok{"Flevoland"}\NormalTok{, }\AttributeTok{value =} \DecValTok{1417}\NormalTok{ )}
 \FunctionTok{colnames}\NormalTok{(flevoland) }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"province"}\NormalTok{, }\StringTok{"Area(KM2)"}\NormalTok{)}
-
 \NormalTok{area\_data\_working }\OtherTok{\textless{}{-}} \FunctionTok{bind\_rows}\NormalTok{(}
 \NormalTok{  area\_data\_working[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, ], flevoland,  }
 \NormalTok{  area\_data\_working[}\DecValTok{6}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(area\_data\_working), ]}
@@ -301,10 +293,9 @@ formal.
 \begin{Highlighting}[]
 \NormalTok{area\_data\_working }\OtherTok{\textless{}{-}}\NormalTok{ area\_data\_working }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{slice}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{n}\NormalTok{(), }\AttributeTok{each =} \DecValTok{12}\NormalTok{))}
-
 \NormalTok{merged\_panel\_data\_final }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(merged\_data, area\_data\_working[, }\DecValTok{3}\NormalTok{])}
-
-\FunctionTok{colnames}\NormalTok{(merged\_panel\_data\_final) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"year"}\NormalTok{, }\StringTok{"province"}\NormalTok{, }\StringTok{"unemployment\_rate"}\NormalTok{, }\StringTok{"total\_crimes"}\NormalTok{, }\StringTok{"population"}\NormalTok{, }\StringTok{"crimes\_per\_capita"}\NormalTok{, }\StringTok{"area\_km2"}\NormalTok{)}
+\FunctionTok{colnames}\NormalTok{(merged\_panel\_data\_final) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"year"}\NormalTok{, }\StringTok{"province"}\NormalTok{, }\StringTok{"unemployment\_rate"}\NormalTok{,}
+                                       \StringTok{"total\_crimes"}\NormalTok{, }\StringTok{"population"}\NormalTok{, }\StringTok{"crimes\_per\_capita"}\NormalTok{, }\StringTok{"area\_km2"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -314,22 +305,16 @@ formal.
 
 \NormalTok{agg\_unemployment }\OtherTok{\textless{}{-}}\NormalTok{ agg\_unemployment[}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{51}\NormalTok{,}\DecValTok{52}\NormalTok{) ,]}
 \NormalTok{agg\_unemployment }\OtherTok{\textless{}{-}}\NormalTok{ agg\_unemployment[, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
-
 \NormalTok{agg\_crime }\OtherTok{\textless{}{-}}\NormalTok{ agg\_crime[}\SpecialCharTok{{-}}\DecValTok{82}\NormalTok{ , ]}
 \NormalTok{agg\_crime }\OtherTok{\textless{}{-}}\NormalTok{ agg\_crime[}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{31}\NormalTok{) ,]}
 \NormalTok{agg\_crime }\OtherTok{\textless{}{-}}\NormalTok{ agg\_crime[, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
-
 \FunctionTok{colnames}\NormalTok{(agg\_unemployment) }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"year"}\NormalTok{, }\StringTok{"unemployment"}\NormalTok{)}
 \FunctionTok{colnames}\NormalTok{(agg\_crime) }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"year"}\NormalTok{, }\StringTok{"total\_crimes"}\NormalTok{)}
-
 \NormalTok{agg\_merged }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(agg\_unemployment, agg\_crime[, }\DecValTok{2}\NormalTok{])}
-
 \FunctionTok{colnames}\NormalTok{(agg\_merged) }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"year"}\NormalTok{, }\StringTok{"unemployment"}\NormalTok{, }\StringTok{"total\_crime"}\NormalTok{)}
-
 \NormalTok{agg\_merged }\OtherTok{\textless{}{-}}\NormalTok{ agg\_merged }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{total\_crime =} \FunctionTok{as.numeric}\NormalTok{(total\_crime)) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{year =} \FunctionTok{as.numeric}\NormalTok{(year))}
-
 \FunctionTok{str}\NormalTok{(agg\_merged)}
 \end{Highlighting}
 \end{Shaded}
@@ -346,9 +331,7 @@ formal.
 \NormalTok{agg\_population }\OtherTok{\textless{}{-}}\NormalTok{agg\_population[, }\SpecialCharTok{{-}}\DecValTok{4}\NormalTok{]}
 \NormalTok{agg\_population }\OtherTok{\textless{}{-}}\NormalTok{ agg\_population[, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
 \NormalTok{agg\_population }\OtherTok{\textless{}{-}}\NormalTok{ agg\_population[}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{75}\NormalTok{) ,]}
-
 \NormalTok{agg\_merged }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(agg\_merged, agg\_population[, }\DecValTok{2}\NormalTok{])}
-
 \FunctionTok{colnames}\NormalTok{(agg\_merged) }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"year"}\NormalTok{, }\StringTok{"unemployment"}\NormalTok{, }\StringTok{"total\_crime"}\NormalTok{, }\StringTok{"population"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -356,27 +339,16 @@ formal.
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# subpopulation}
-
 \NormalTok{crime2021 }\OtherTok{\textless{}{-}}\NormalTok{ criminaliteit\_per\_leeftijd }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(Perioden }\SpecialCharTok{==} \StringTok{"2021"}\NormalTok{)}
-
 \NormalTok{crime2021 }\OtherTok{\textless{}{-}}\NormalTok{ crime2021 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(Geboorteland }\SpecialCharTok{==} \StringTok{"Totaal"}\NormalTok{)}
-
 \NormalTok{crime2021 }\OtherTok{\textless{}{-}}\NormalTok{ crime2021[, }\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\DecValTok{4}\SpecialCharTok{:}\DecValTok{8}\NormalTok{)]}
-
 \FunctionTok{colnames}\NormalTok{(crime2021) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Age"}\NormalTok{, }\StringTok{"Crime"}\NormalTok{)}
-
 \NormalTok{crime2021}\SpecialCharTok{$}\NormalTok{Crime }\OtherTok{=}\NormalTok{ (crime2021}\SpecialCharTok{$}\NormalTok{Crime}\SpecialCharTok{/}\DecValTok{10000}\NormalTok{)}\SpecialCharTok{*}\DecValTok{100}
-
 \NormalTok{unemployment\_age }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"data/raw\_data/unemployment\_per\_age.csv"}\NormalTok{)}
-
 \NormalTok{unemployment\_age }\OtherTok{\textless{}{-}}\NormalTok{ unemployment\_age[}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{6}\NormalTok{, }\DecValTok{19}\NormalTok{) ,]}
-
 \NormalTok{unemployment\_age }\OtherTok{\textless{}{-}}\NormalTok{ unemployment\_age[, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
-
 \FunctionTok{colnames}\NormalTok{(unemployment\_age) }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"Age"}\NormalTok{, }\StringTok{"Unemployment"}\NormalTok{)}
-
 \NormalTok{unemployment\_age}\SpecialCharTok{$}\NormalTok{Unemployment }\OtherTok{\textless{}{-}} \FunctionTok{gsub}\NormalTok{(}\StringTok{","}\NormalTok{, }\StringTok{"."}\NormalTok{, unemployment\_age}\SpecialCharTok{$}\NormalTok{Unemployment)}
-
 \NormalTok{unemployment\_age}\SpecialCharTok{$}\NormalTok{Unemployment }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(unemployment\_age}\SpecialCharTok{$}\NormalTok{Unemployment)}
 \end{Highlighting}
 \end{Shaded}
@@ -422,7 +394,8 @@ variation}\label{visualize-temporal-variation}
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{Template_Assignment_files/figure-latex/unnamed-chunk-4-1.pdf}}
+\includegraphics[width=0.8\linewidth]{Template_Assignment_files/figure-latex/unnamed-chunk-4-1}
+
 This time series can be seperated into two larger periods. Pre 2000
 where crime seems to follow unemployment, and post 2000 where crime
 seems less corralated to unemployment, apart from certain periods.
@@ -432,22 +405,10 @@ periods.
 \subsection{3.4 Visualize spatial
 variation}\label{visualize-spatial-variation}
 
-\begin{verbatim}
-## 'data.frame':    620 obs. of  4 variables:
-##  $ region: chr  "arbeidsmarktregio" "arbeidsmarktregio" "arbeidsmarktregio" "arbeidsmarktregio" ...
-##  $ year  : int  2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 ...
-##  $ wgs84 : chr  "https://cartomap.github.io/nl/wgs84/arbeidsmarktregio_2014.geojson" "https://cartomap.github.io/nl/wgs84/arbeidsmarktregio_2015.geojson" "https://cartomap.github.io/nl/wgs84/arbeidsmarktregio_2016.geojson" "https://cartomap.github.io/nl/wgs84/arbeidsmarktregio_2017.geojson" ...
-##  $ rd    : chr  "https://cartomap.github.io/nl/rd/arbeidsmarktregio_2014.geojson" "https://cartomap.github.io/nl/rd/arbeidsmarktregio_2015.geojson" "https://cartomap.github.io/nl/rd/arbeidsmarktregio_2016.geojson" "https://cartomap.github.io/nl/rd/arbeidsmarktregio_2017.geojson" ...
-\end{verbatim}
-
-\pandocbounded{\includegraphics[keepaspectratio]{Template_Assignment_files/figure-latex/unnamed-chunk-8-1.pdf}}
-
-\pandocbounded{\includegraphics[keepaspectratio]{Template_Assignment_files/figure-latex/pop-heatmap-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{Template_Assignment_files/figure-latex/unnamed-chunk-6-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{Template_Assignment_files/figure-latex/unnamed-chunk-6-2.pdf}}
 
 \pandocbounded{\includegraphics[keepaspectratio]{Template_Assignment_files/figure-latex/unemp-heatmap-1.pdf}}
-
-\section{\textless\textless\textless\textless\textless\textless\textless{}
-HEAD}\label{head}
 
 We can generally see the pattern that crime per capita follows
 unemployment. An anomaly is Groningen. Its unemployment is high, yet
@@ -459,22 +420,8 @@ the connection is not as straighforward. Individual cities and
 munciplaties were not plotted, which impacts our abilitiy to draw
 conclusions.
 
-\begin{quote}
-\begin{quote}
-\begin{quote}
-\begin{quote}
-\begin{quote}
-\begin{quote}
-\begin{quote}
-d22ac6077aa71c465abe179b2f0ae4d7a514a3ae \#\# 3.5 Visualize
-sub-population variation
-\end{quote}
-\end{quote}
-\end{quote}
-\end{quote}
-\end{quote}
-\end{quote}
-\end{quote}
+\subsection{3.5 Visualize sub-population
+variation}\label{visualize-sub-population-variation}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -485,13 +432,6 @@ sub-population variation
     \AttributeTok{x =} \StringTok{"Age category"}\NormalTok{,}
     \AttributeTok{y =} \StringTok{"Crime Rate"}
 \NormalTok{  ) }
-\end{Highlighting}
-\end{Shaded}
-
-\pandocbounded{\includegraphics[keepaspectratio]{Template_Assignment_files/figure-latex/visualise_subpopulations-1.pdf}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(unemployment\_age, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Age, }\AttributeTok{y =}\NormalTok{ Unemployment)) }\SpecialCharTok{+}
   \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill =} \StringTok{"yellow"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}
@@ -502,7 +442,8 @@ sub-population variation
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{Template_Assignment_files/figure-latex/visualise_subpopulations-2.pdf}}
+\includegraphics[width=0.48\linewidth]{Template_Assignment_files/figure-latex/visualise_subpopulations-1}
+\includegraphics[width=0.48\linewidth]{Template_Assignment_files/figure-latex/visualise_subpopulations-2}
 
 In the boxplots above, it is clearly visible that unemployment and crime
 are linked. The Youth category is more vulnarable to unemployment than
@@ -533,7 +474,7 @@ criminality regardless of employment status.
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{Template_Assignment_files/figure-latex/analysis-1.pdf}}
+\includegraphics[width=0.8\linewidth]{Template_Assignment_files/figure-latex/analysis-1}
 
 Both 1979 oil-crises and the 2008 recession see large spikes in
 unemployment, yet only 1979 sees an increase in crimp per capita as

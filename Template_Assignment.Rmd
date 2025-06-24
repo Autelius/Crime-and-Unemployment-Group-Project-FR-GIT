@@ -1,16 +1,24 @@
 ---
-title: The relationship between unemployment and crime in the Netherlands
-author: Romeo Schoonderbeek, 2868407
-        Paul Claessens, 2859603
-        Furkan Kadir Öztürk, 2852640 
-        Serena Kula 2856584
-        Bjorn Smit 2812968
-        Lia Seo 2841955
-Lecturer : Jack Flitzgerald, Chantal Schouwenaar
-        
+title: |
+  \vspace{-2em}
+  The relationship between unemployment and crime in the Netherlands
+author: |
+  Romeo Schoonderbeek 2868407,  Paul Claessens 2859603,  
+  Furkan Kadir Öztürk 2852640,  Serena Kula 2856584,  
+  Bjorn Smit 2812968,  Lia Seo 2841955
 date: "`r Sys.Date()`"
-output: pdf_document
+output: 
+  pdf_document:
+    keep_tex: true
 ---
+
+
+```{=latex}
+% ── Shrink overall font to 10pt and tighten spacing ──
+\fontsize{8}{12}\selectfont  
+\setlength{\parskip}{0.5em}
+\setlength{\headsep}{0.5em}
+```
 
 # Set-up your environment
 
@@ -40,7 +48,7 @@ Our Social problem is to look at the relation between crime and unemployment, si
 # province level
 DS_Panel_Unemployment <- read.csv("data/raw_data/unemployment_data_transform.csv")
 DS_Panel_Crime <- read.csv("data/raw_data/panel_data_crime.csv")
-DS_Population <- read.csv("data/population_data.csv")
+DS_Population <- read.csv("data/raw_data/population_data.csv")
 area_data_working <- read.csv("data/raw_data/area_data.csv")
 
 # aggragate
@@ -50,7 +58,6 @@ agg_population <- read.csv("data/raw_data/population_data_raw.csv")
 
 # subpopulation
 criminaliteit_per_leeftijd <- read.csv("data/raw_data/criminaliteit_per_leeftijd.csv") 
-
 unemployment_age <- read.csv("data/raw_data/unemployment_per_age.csv") 
 ```
 
@@ -72,29 +79,18 @@ CBS datasets already come in panel data form. Data cleaning will include removin
 # province panel data cleaning
 
 merged_data <- cbind(DS_Panel_Unemployment, DS_Panel_Crime [, 5])
-
 merged_data <-cbind(merged_data, DS_Population [, 4])
-
 merged_data <- merged_data [, -c(1)] 
 colnames(merged_data) <- c("Year", "province", "Unemployment_Rate", "total_Crimes", "Population")
-
 merged_data <- mutate(merged_data, crimes_per_capita = (total_Crimes/Population)*100)
-
 write.csv(merged_data, "data/working_data/merged_panel_data_final.csv")
-
 area_data_working <- read.csv("data/raw_data/area_data.csv")
-
 colnames(area_data_working) = c("X", "province", "Area(KM2)")
-
 area_data_working <- area_data_working[6:17 ,]
-
 area_data_working[[3]]  = as.numeric(area_data_working[[3]])
-
 area_data_working[, 3] = area_data_working[, 3]/ 100
-
 flevoland <- data.frame(name = "Flevoland", value = 1417 )
 colnames(flevoland) = c("province", "Area(KM2)")
-
 area_data_working <- bind_rows(
   area_data_working[1:5, ], flevoland,  
   area_data_working[6:nrow(area_data_working), ]
@@ -102,10 +98,9 @@ area_data_working <- bind_rows(
 
 area_data_working <- area_data_working %>%
   slice(rep(1:n(), each = 12))
-
 merged_panel_data_final <- cbind(merged_data, area_data_working[, 3])
-
-colnames(merged_panel_data_final) <- c("year", "province", "unemployment_rate", "total_crimes", "population", "crimes_per_capita", "area_km2")
+colnames(merged_panel_data_final) <- c("year", "province", "unemployment_rate",
+                                       "total_crimes", "population", "crimes_per_capita", "area_km2")
 ```
 
 ```{r}
@@ -113,56 +108,36 @@ colnames(merged_panel_data_final) <- c("year", "province", "unemployment_rate", 
 
 agg_unemployment <- agg_unemployment[-c(51,52) ,]
 agg_unemployment <- agg_unemployment[, -1]
-
 agg_crime <- agg_crime[-82 , ]
 agg_crime <- agg_crime[-c(1:31) ,]
 agg_crime <- agg_crime[, -1]
-
 colnames(agg_unemployment) = c("year", "unemployment")
 colnames(agg_crime) = c("year", "total_crimes")
-
 agg_merged <- cbind(agg_unemployment, agg_crime[, 2])
-
 colnames(agg_merged) = c("year", "unemployment", "total_crime")
-
 agg_merged <- agg_merged %>%
   mutate(total_crime = as.numeric(total_crime)) %>%
   mutate(year = as.numeric(year))
-
 str(agg_merged)
-
 agg_population <-agg_population[, -4]
 agg_population <- agg_population[, -1]
 agg_population <- agg_population[-c(1:75) ,]
-
 agg_merged <- cbind(agg_merged, agg_population[, 2])
-
 colnames(agg_merged) = c("year", "unemployment", "total_crime", "population")
 ```
 
 ```{r}
 # subpopulation
-
 crime2021 <- criminaliteit_per_leeftijd %>% filter(Perioden == "2021")
-
 crime2021 <- crime2021 %>% filter(Geboorteland == "Totaal")
-
 crime2021 <- crime2021[, -c(1:2, 4:8)]
-
 colnames(crime2021) <- c("Age", "Crime")
-
 crime2021$Crime = (crime2021$Crime/10000)*100
-
 unemployment_age <- read.csv("data/raw_data/unemployment_per_age.csv")
-
 unemployment_age <- unemployment_age[-c(1:6, 19) ,]
-
 unemployment_age <- unemployment_age[, -1]
-
 colnames(unemployment_age) = c("Age", "Unemployment")
-
 unemployment_age$Unemployment <- gsub(",", ".", unemployment_age$Unemployment)
-
 unemployment_age$Unemployment <- as.numeric(unemployment_age$Unemployment)
 ```
 ## 3.2 Generate necessary variables
@@ -189,7 +164,7 @@ unemployment_age$Age <- ifelse(unemployment_age$Age %in% c("15 tot 20 jaar", "20
 
 ## 3.3 Visualize temporal variation
 
-```{r}
+```{r, out.width='80%'}
 pivot_agg_data <- agg_merged %>%
   pivot_longer(cols = c(unemployment, crime_per_capita), names_to = "variable", values_to = "value")
 
@@ -198,24 +173,22 @@ ggplot(pivot_agg_data, aes(x = year, y = value, colour = variable )) +
   labs(title = "aggragate crime and unemployment through time", x = "year", y = "variable") +
   scale_x_continuous(breaks = seq(1975, 2024, by = 5), limits = c(1972, 2026))
 ```
+
 This time series can be seperated into two larger periods. Pre 2000 where crime seems to follow unemployment, and post 2000 where crime seems less corralated to unemployment, apart from certain periods. Surprisingly, unemployment seems to be lagging behind crime in certain periods. 
 
 ## 3.4 Visualize spatial variation
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, message=FALSE, include=FALSE, warning=FALSE}
+# Loading cbs maps & GeoJSON
 cbs_maps <- cbs_get_maps()
-
-str(cbs_maps)
 
 #reading the GeoJSON straight from PDOK 
 nl_prov <- st_read(
   "https://cartomap.github.io/nl/wgs84/provincie_2014.geojson",
   quiet = TRUE
 )
-```
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-#Reading  →  2023 only
+# Filter & recoding  2023  data
 crime <- merged_panel_data_final |>
   filter(year == 2023) |>
   mutate(
@@ -223,57 +196,43 @@ crime <- merged_panel_data_final |>
     province = recode(province, "Fryslân" = "Friesland")
   ) |>
   filter(!province %in% "Nederland")
-```
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-# Province shapes (CBS 2014)
-prov_shapes <- read_sf("https://cartomap.github.io/nl/wgs84/provincie_2014.geojson")
 # Join data → map
+prov_shapes <- read_sf("https://cartomap.github.io/nl/wgs84/provincie_2014.geojson")
 nl_crime <- prov_shapes |>
   left_join(crime, by = c("statnaam" = "province"))
 ```
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-ggplot(nl_crime) +
+```{r, echo=FALSE, message=FALSE, include=TRUE, warning=FALSE, fig.show='hold'}
+# Crime per capita
+p1 <- ggplot(nl_crime) +
   geom_sf(aes(fill = crimes_per_capita), color = "white", size = 0.2) +
   scale_fill_gradient(
-    low  = "#fee5d9",  # pale red
-    high = "#a50f15",  # dark red
+    low  = "#fee5d9",
+    high = "#a50f15",
     na.value = "grey90",
     name = "Crime\nper capita"
   ) +
-  labs(
-    title = "Crime per capita by Dutch province – 2023"
-  ) +
-  theme_minimal() +
-  theme(
-    panel.grid = element_blank(),
-    axis.text  = element_blank(),
-    axis.ticks = element_blank()
-  )
-```
+  labs(title = "Crime per capita by Dutch province – 2023") +
+  theme_minimal() + theme_void()
 
-```{r pop-heatmap, echo=FALSE, message=FALSE, warning=FALSE}
-ggplot(nl_crime) +
+# Population density
+p2 <- ggplot(nl_crime) +
   geom_sf(aes(fill = poplation_density), color = "white", size = 0.2) +
   scale_fill_gradient(
-    low  = "#deebf7",  # pale blue
-    high = "#08306b",  # dark blue
+    low  = "#deebf7",
+    high = "#08306b",
     na.value = "grey90",
     name = "Population\ndensity"
   ) +
-  labs(
-    title = "Population density by Dutch province – 2023"
-  ) +
-  theme_minimal() +
-  theme(
-    panel.grid = element_blank(),
-    axis.text  = element_blank(),
-    axis.ticks = element_blank()
-  )
+  labs(title = "Population density by Dutch province – 2023") +
+  theme_minimal() + theme_void()
+
+print(p1)
+print(p2)
 ```
 
-```{r unemp-heatmap, echo=FALSE, message=FALSE, warning=FALSE}
+```{r unemp-heatmap, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE}
 ggplot(nl_crime) +
   geom_sf(aes(fill = unemployment_rate), color = "white", size = 0.2) +
   scale_fill_gradient(
@@ -285,24 +244,15 @@ ggplot(nl_crime) +
   labs(
     title = "Unemployment rate by Dutch province – 2023"
   ) +
-  theme_minimal() +
-  theme(
-    panel.grid = element_blank(),
-    axis.text  = element_blank(),
-    axis.ticks = element_blank()
-  )
+  theme_minimal() + theme_void()
 ```
-
-<<<<<<< HEAD
-=======
 
 We can generally see the pattern that crime per capita follows unemployment. An anomaly is Groningen. Its unemployment is high, yet crime per capita is failry low. Similarly, Flevoland's unemployment is fairly yet its crime per capita is somewhat lower. If population density is considered, than this pattern migh be better explained. Furthermore,  Other factors can also affect cause these anomalies, which shows that the connection is not as straighforward. Individual cities and munciplaties were not plotted, which impacts our abilitiy to draw conclusions. 
 
 
->>>>>>> d22ac6077aa71c465abe179b2f0ae4d7a514a3ae
 ## 3.5 Visualize sub-population variation
 
-```{r visualise_subpopulations}
+```{r visualise_subpopulations, fig.show='hold', out.width='48%'}
 ggplot(crime2021, aes(x = Age, y = Crime)) +
   geom_boxplot(fill = "yellow", color = "black") +
   labs(
@@ -323,7 +273,7 @@ In the boxplots above, it is clearly visible that unemployment and crime are lin
 
 ## 3.6 Event analysis
 
-```{r analysis}
+```{r analysis, out.width='80%'}
 pivot_agg_data <- agg_merged %>%
   pivot_longer(cols = c(unemployment, crime_per_capita), names_to = "variable", values_to = "value")
 
