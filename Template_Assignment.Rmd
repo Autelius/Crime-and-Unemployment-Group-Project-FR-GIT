@@ -177,13 +177,6 @@ colnames(unemployment_age) = c("Age", "Unemployment")
 unemployment_age$Unemployment <- gsub(",", ".", unemployment_age$Unemployment)
 
 unemployment_age$Unemployment <- as.numeric(unemployment_age$Unemployment)
-
-
-
-
-
-
-
 ```
 
 Please use a separate 'R block' of code for each type of cleaning. So, e.g. one for missing values, a new one for removing unnecessary variables etc.
@@ -197,9 +190,6 @@ agg_merged <- agg_merged %>%
   mutate(crime_per_capita = (total_crime/population)*100)
 
 merged_panel_data_final <- mutate(merged_panel_data_final, poplation_density = population/area_km2)
-
-
-
 ```
 
 Variable 3 Age categories
