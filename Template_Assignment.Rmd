@@ -3,6 +3,9 @@ title: The relationship between unemployment and crime in the Netherlands
 author: Romeo Schoonderbeek, 2868407
         Paul Claessens, 2859603
         Furkan Kadir Öztürk, 2852640 
+        Serena Kula 2856584
+        Bjorn Smit 2812968
+        Lia Seo 2841955
 Lecturer : Jack Flitzgerald, Chantal Schouwenaar
         
 date: "`r Sys.Date()`"
@@ -55,7 +58,7 @@ unemployment_age <- read.csv("data/raw_data/unemployment_per_age.csv")
 
 ## 2.2 Provide a short summary of the dataset's
 
-The data sets are categorized within 3 categories: province level, aggregate and sub population. 
+The data sets are categorized within 3 categories: province level, aggregate and sub population. Since our topic is the relation between crime and unemployment in the Netherlands, these datasets are very suitable. The datasets do not only provide the crime and unemployment data for the Netherlands it self but also on a provincial level and age category, which allows for spatial variation and subpopulation analysis. The main variables used are unemployment rates - total unemployed working population/working population*100 - and amount of crimes registered per year. Since the data sets are classified as penal data sets, unemployment and crime can be compared each year. Population data sets are used to convert total crime to crime per capita, which allows for population control per province. CBS measures unemployment by surveying 20000 Dutch people of working age who actively seek employment, but are not employed. Population data each year is measured by Basis regristartie personen. And crime data orginates from data gathered by the Dutch police. 
 
 ## 2.3 limitations
 
@@ -65,7 +68,7 @@ For crime statistics, Only crimes that are registered are accounted for, however
 
 ## 3.1 Data cleaning
 
-CBS datasets already come in panel data form. Data cleaning will include removing unnecessary rows and columns, adjusting data frames and merging data sets. 3 main data sets are used. Province panel data, aggregate panel data and data sets used for sub population analysis.
+CBS datasets already come in panel data form. Data cleaning will include removing unnecessary rows and columns, adjusting data frames and merging data sets. 3 main data sets are used. Province panel data, aggregate panel data and data sets used for sub population analysis.Futhermore, certain entries within data sets have to be converted to numerics. Finally column names are given to make the data sets more structured and formal. 
 
 ```{r}
 # province panel data cleaning
@@ -105,9 +108,9 @@ area_data_working <- area_data_working %>%
 merged_panel_data_final <- cbind(merged_data, area_data_working[, 3])
 
 colnames(merged_panel_data_final) <- c("year", "province", "unemployment_rate", "total_crimes", "population", "crimes_per_capita", "area_km2")
+```
 
-
-
+```{r}
 # aggregate data cleaning
 
 agg_unemployment <- agg_unemployment[-c(51,52) ,]
@@ -137,11 +140,9 @@ agg_population <- agg_population[-c(1:75) ,]
 agg_merged <- cbind(agg_merged, agg_population[, 2])
 
 colnames(agg_merged) = c("year", "unemployment", "total_crime", "population")
+```
 
-str(agg_merged)
-
-
-
+```{r}
 # subpopulation
 
 crime2021 <- criminaliteit_per_leeftijd %>% filter(Perioden == "2021")
@@ -166,7 +167,6 @@ unemployment_age$Unemployment <- gsub(",", ".", unemployment_age$Unemployment)
 
 unemployment_age$Unemployment <- as.numeric(unemployment_age$Unemployment)
 ```
-
 ## 3.2 Generate necessary variables
 
 Variable 1 and 2 (Crimes per capita and population density)
@@ -347,7 +347,7 @@ Both 1979 oil-crises and the 2008 recession see large spikes in unemployment, ye
 
 ## 4.1 Discuss your findings
 
-The clearly shows that unemployment and crime are correlated, but also implicates that there is not a direct causality between unemployment and crime. Unemployment is likely a catalyst for crime. That is, unemployment is related to various social factors which might directly impact potency to commit crimes. These results can be of interest for policy makers, as not only battling unemployment helps prevent crime, but setting up other social programs might reduce blowbacks of unemployment. Allocating funds towards vulnarable groups, such as youth,  and areas with a high population density will achieve the greatest results. 
+The results clearly shows that unemployment and crime are correlated, but also implicates that there is not a direct causality between unemployment and crime. Unemployment is likely a catalyst for crime. That is, unemployment is related to various social factors which might directly impact potency to commit crimes. These results can be of interest for policy makers, as not only battling unemployment helps prevent crime, but setting up other social programs might reduce blowbacks of unemployment. Allocating funds towards vulnarable groups, such as youth,  and areas with a high population density will achieve the greatest results. 
 
 # Part 5 - Reproducibility
 
@@ -379,5 +379,9 @@ Statline. (2025). Verdachten; geslacht, leeftijd, herkomst, opleiding, huishoude
 Statline. (2025). Arbeidsdeelname; kerncijfers, 2013-2024 [Data set]. Centraal Bureau voor de Statistiek. https://opendata.cbs.nl/#/CBS/nl/dataset/85264NED/table?dl=BE1F8 
 
 Bezuinigen en hervormingen in de jaren ’80. (2022, June 21).  IsGeschiedenis. https://isgeschiedenis.nl/nieuws/bezuinigen-en-hervormingen-in-de-jaren-80
+
+Yeung, W. J., & Yang, Y. (2020). Labor Market Uncertainties for Youth and Young Adults: An International Perspective. The Annals Of The American Academy Of Political And Social Science, 688(1), 7–19. https://doi.org/10.1177/0002716220913487
+
+Kessler, J. B., Tahamont, S., Gelber, A., & Isen, A. (2022). The Effects of Youth Employment on Crime: Evidence from New York City Lotteries. Journal Of Policy Analysis And Management, 41(3), 710–730. https://doi.org/10.1002/pam.22393
 
 
