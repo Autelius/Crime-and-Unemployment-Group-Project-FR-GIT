@@ -138,7 +138,7 @@ merged_panel_data_final <- cbind(merged_data, area_data_working[, 3])
 
 colnames(merged_panel_data_final) <- c("year", "province", "unemployment_rate", "total_crimes", "population", "crimes_per_capita", "area_km2")
 
-merged_panel_data_final <- mutate(merged_panel_data_final, poplation_density = population/area_km2)
+
 
 # aggregate data cleaning
 
@@ -172,8 +172,7 @@ colnames(agg_merged) = c("year", "unemployment", "total_crime", "population")
 
 str(agg_merged)
 
-agg_merged <- agg_merged %>%
-  mutate(crime_per_capita = (total_crime/population)*100)
+
 
 # subpopulation
 
@@ -211,15 +210,19 @@ Please use a separate 'R block' of code for each type of cleaning. So, e.g. one 
 
 ## 3.2 Generate necessary variables
 
-Variable 1
+Variable 1 and 2 (Crimes per capita and Unemployment per capita)
 
-```{r gen_var1}
+```{r gen_var1 and 2}
+agg_merged <- agg_merged %>%
+  mutate(crime_per_capita = (total_crime/population)*100)
+
+merged_panel_data_final <- mutate(merged_panel_data_final, poplation_density = population/area_km2)
 
 ```
 
-Variable 2
+Variable 3 Age categories
 
-```{r gen_var2}
+```{r gen_var3}
 
 crime2021$Age <- ifelse(crime2021$Age %in% c("12 tot 18 jaar", "18 tot 23 jaar"),
                                      "Youth (12–23)", "Adult+ (23+)")
